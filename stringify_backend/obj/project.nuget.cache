@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rro0WblqbeM=",
+  "dgSpecHash": "KfRAKHYv64A=",
   "success": true,
-  "projectFilePath": "C:\\Users\\KosaA\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
+  "projectFilePath": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\KosaA\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
+    "C:\\Users\\aronk\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
   ],
   "logs": []
 }
