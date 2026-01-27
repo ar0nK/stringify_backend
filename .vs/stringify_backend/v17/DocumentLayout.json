@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\models\\jogok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\jogok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\models\\stringifydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\stringifydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\models\\jogok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\jogok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,6 +27,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "StringifyDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\StringifyDbContext.cs",
+              "RelativeDocumentMoniker": "stringify_backend\\Models\\StringifyDbContext.cs",
+              "ToolTip": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\StringifyDbContext.cs",
+              "RelativeToolTip": "stringify_backend\\Models\\StringifyDbContext.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAswD0AAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T07:30:01.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Jogok.cs",
               "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\Jogok.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\Jogok.cs",
@@ -41,7 +58,7 @@
               "RelativeDocumentMoniker": "stringify_backend\\Models\\User.cs",
               "ToolTip": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\User.cs",
               "RelativeToolTip": "stringify_backend\\Models\\User.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBMAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-27T06:38:06.776Z",
               "EditorCaption": ""

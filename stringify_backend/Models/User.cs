@@ -9,13 +9,15 @@ namespace stringify_backend.Models
     {
         public int Id { get; set; }
 
-        public string TeljesNev { get; set; } = null!;
+        public string Nev { get; set; } = null!;
 
         public string Salt { get; set; } = null!;
 
         public string Hash { get; set; } = null!;
 
         public string Email { get; set; } = null!;
+
+        public string Telefonszam { get; set; } = null!;
 
         public int Jogosultsag { get; set; }
 
