@@ -50,7 +50,7 @@ public partial class StringifyDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "Email").IsUnique();
 
-            entity.HasIndex(e => e.Telefonszam, "Email");
+            entity.HasIndex(e => e.Telefonszam, "Telefonszam");
 
             entity.HasIndex(e => e.Nev, "Nev");
 
