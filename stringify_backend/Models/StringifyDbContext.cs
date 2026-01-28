@@ -20,6 +20,9 @@ public partial class StringifyDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<EgyediGitar> EgyediGitarok { get; set; }
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning 
         => optionsBuilder.UseMySQL("SERVER=localhost;PORT=3306;DATABASE=stringify;USER=root;PASSWORD=;SSL MODE=none;");
@@ -76,6 +79,24 @@ public partial class StringifyDbContext : DbContext
                 .HasForeignKey(d => d.Jogosultsag)
                 .HasConstraintName("user_ibfk_1");
         });
+        modelBuilder.Entity<EgyediGitar>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.ToTable("egyedi_gitar");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)");
+            entity.Property(e => e.BodyShapeId).HasColumnType("int(11)");
+            entity.Property(e => e.BodyWoodId).HasColumnType("int(11)");
+            entity.Property(e => e.NeckWoodId).HasColumnType("int(11)");
+            entity.Property(e => e.NeckPickupId).HasColumnType("int(11)");
+            entity.Property(e => e.MiddlePickupId).HasColumnType("int(11)");
+            entity.Property(e => e.BridgePickupId).HasColumnType("int(11)");
+            entity.Property(e => e.FinishId).HasColumnType("int(11)");
+            entity.Property(e => e.PickguardId).HasColumnType("int(11)");
+            entity.Property(e => e.Letrehozva).HasColumnType("datetime");
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }
