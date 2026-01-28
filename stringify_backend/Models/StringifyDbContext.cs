@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using stringify_backend.Models;
 
-namespace ProjektNeveBackend.Models;
+namespace stringify_backend.Models;
 
 public partial class StringifyDbContext : DbContext
 {
@@ -21,7 +21,7 @@ public partial class StringifyDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+#warning 
         => optionsBuilder.UseMySQL("SERVER=localhost;PORT=3306;DATABASE=stringify;USER=root;PASSWORD=;SSL MODE=none;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,9 +61,9 @@ public partial class StringifyDbContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Telefonszam).HasMaxLength(30);
             entity.Property(e => e.Nev).HasMaxLength(50);
-            entity.Property(e => e.Hash)
+            entity.Property(e => e.Jelszo)
                 .HasMaxLength(64)
-                .HasColumnName("HASH");
+                .HasColumnName("Jelszo");
             entity.Property(e => e.Jogosultsag).HasColumnType("int(1)");
             
             entity.Property(e => e.Salt)

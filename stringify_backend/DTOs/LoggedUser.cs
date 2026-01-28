@@ -1,4 +1,4 @@
-﻿namespace ProjektNeveBackend.DTOs
+﻿namespace stringify_backend.DTOs
 {
     public class LoggedUser
     {
