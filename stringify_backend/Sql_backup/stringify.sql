@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Jan 28. 11:07
+-- Létrehozás ideje: 2026. Jan 28. 12:01
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -63,7 +63,8 @@ CREATE TABLE `felhasznalo` (
   `Nev` varchar(100) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Jelszo` varchar(255) NOT NULL,
-  `Telefonszam` varchar(30) DEFAULT NULL
+  `Telefonszam` varchar(30) DEFAULT NULL,
+  `Jogosultsag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -193,25 +194,6 @@ CREATE TABLE `rendeles_tetel` (
   `Darab` int(11) NOT NULL DEFAULT 1,
   `Ar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `szerepkor`
---
-
-CREATE TABLE `szerepkor` (
-  `Id` int(11) NOT NULL,
-  `Nev` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- A tábla adatainak kiíratása `szerepkor`
---
-
-INSERT INTO `szerepkor` (`Id`, `Nev`) VALUES
-(2, 'ADMIN'),
-(1, 'USER');
 
 -- --------------------------------------------------------
 
@@ -373,13 +355,6 @@ ALTER TABLE `rendeles_tetel`
   ADD KEY `EgyediGitarId` (`EgyediGitarId`);
 
 --
--- A tábla indexei `szerepkor`
---
-ALTER TABLE `szerepkor`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Nev` (`Nev`);
-
---
 -- A tábla indexei `termek`
 --
 ALTER TABLE `termek`
@@ -462,12 +437,6 @@ ALTER TABLE `rendeles`
 --
 ALTER TABLE `rendeles_tetel`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT a táblához `szerepkor`
---
-ALTER TABLE `szerepkor`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
