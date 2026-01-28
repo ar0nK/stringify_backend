@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\stringify_backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\stringify_backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\dtos\\loggeduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\dtos\\loggeduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\models\\stringifydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\stringifydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\stringify_backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\stringify_backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\aronk\\documents\\github\\stringify_backend\\stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,7 +39,33 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "stringify_backend",
+              "Title": "LoggedUser.cs",
+              "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\LoggedUser.cs",
+              "RelativeDocumentMoniker": "stringify_backend\\DTOs\\LoggedUser.cs",
+              "ToolTip": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\LoggedUser.cs",
+              "RelativeToolTip": "stringify_backend\\DTOs\\LoggedUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T06:32:52.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "stringify_backend\\DTOs\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\LoginDTO.cs",
+              "RelativeToolTip": "stringify_backend\\DTOs\\LoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T06:32:18.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "stringify_backend.csproj",
               "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
               "RelativeDocumentMoniker": "stringify_backend\\stringify_backend.csproj",
               "ToolTip": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
@@ -43,20 +77,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "StringifyDbContext.cs",
               "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\StringifyDbContext.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\StringifyDbContext.cs",
               "ToolTip": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\StringifyDbContext.cs",
               "RelativeToolTip": "stringify_backend\\Models\\StringifyDbContext.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAswEoAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAgwDcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-27T07:30:01.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Jogok.cs",
               "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\Jogok.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\Jogok.cs",
@@ -68,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\aronk\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\User.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\User.cs",
