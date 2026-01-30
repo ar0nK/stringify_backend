@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Jan 28. 12:01
+-- Létrehozás ideje: 2026. Jan 30. 07:30
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `stringify`
 --
+CREATE DATABASE IF NOT EXISTS `stringify` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci;
+USE `stringify`;
 
 -- --------------------------------------------------------
 
@@ -190,9 +192,7 @@ CREATE TABLE `rendeles_tetel` (
   `Id` int(11) NOT NULL,
   `RendelesId` int(11) NOT NULL,
   `TermekId` int(11) DEFAULT NULL,
-  `EgyediGitarId` int(11) DEFAULT NULL,
-  `Darab` int(11) NOT NULL DEFAULT 1,
-  `Ar` int(11) NOT NULL
+  `EgyediGitarId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
