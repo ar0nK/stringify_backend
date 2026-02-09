@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 07. 19:06
+-- Létrehozás ideje: 2026. Feb 09. 16:20
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -32,23 +32,12 @@ USE `stringify`;
 CREATE TABLE `egyedi_gitar` (
   `Id` int(11) NOT NULL,
   `FelhasznaloId` int(11) DEFAULT NULL,
-  `BodyShapeId` int(11) NOT NULL,
+  `TestformaId` int(11) NOT NULL,
   `FinishId` int(11) DEFAULT NULL,
   `PickguardId` int(11) DEFAULT NULL,
   `NeckId` int(11) NOT NULL,
   `Letrehozva` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
--- --------------------------------------------------------
-
---
--- A nézet helyettes szerkezete `egyedi_gitar_ar`
--- (Lásd alább az aktuális nézetet)
---
-CREATE TABLE `egyedi_gitar_ar` (
-`EgyediGitarId` int(11)
-,`OsszAr` bigint(14)
-);
 
 -- --------------------------------------------------------
 
@@ -73,11 +62,24 @@ CREATE TABLE `felhasznalo` (
 
 CREATE TABLE `gitar_finish` (
   `Id` int(11) NOT NULL,
+  `Nev` varchar(50) NOT NULL,
+  `KepUrl` varchar(255) NOT NULL,
   `Ar` int(11) NOT NULL,
   `TestFormaId` int(11) NOT NULL,
-  `KepUtvonal` varchar(255) NOT NULL,
   `ZIndex` int(11) NOT NULL DEFAULT 10
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `gitar_finish`
+--
+
+INSERT INTO `gitar_finish` (`Id`, `Nev`, `KepUrl`, `Ar`, `TestFormaId`, `ZIndex`) VALUES
+(1, 'Black ', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FBody%2Fblack_body.png', 40000, 1, 10),
+(2, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FBody%2Fred_body.png', 50000, 1, 10),
+(3, 'Sunburst', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FBody%2Fsunburst_body.png', 60000, 1, 10),
+(4, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fblack_body.png', 40000, 2, 10),
+(5, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fred_body.png', 50000, 2, 10),
+(6, 'Sunburst', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fsunburst_body.png', 60000, 2, 10);
 
 -- --------------------------------------------------------
 
@@ -101,10 +103,19 @@ CREATE TABLE `gitar_global_elem` (
 CREATE TABLE `gitar_nyak` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL,
-  `KepUtvonal` varchar(255) NOT NULL,
+  `KepUrl` varchar(255) NOT NULL,
   `Ar` int(11) NOT NULL,
   `ZIndex` int(11) NOT NULL DEFAULT 30
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `gitar_nyak`
+--
+
+INSERT INTO `gitar_nyak` (`Id`, `Nev`, `KepUrl`, `Ar`, `ZIndex`) VALUES
+(1, 'Maple', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FNecks%2Fneck1.png', 70000, 30),
+(2, 'Rosewood', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FNecks%2Fneck2.png', 75000, 30),
+(3, 'Ebony', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FNecks%2Fneck3.png', 80000, 30);
 
 -- --------------------------------------------------------
 
@@ -114,11 +125,24 @@ CREATE TABLE `gitar_nyak` (
 
 CREATE TABLE `gitar_pickguard` (
   `Id` int(11) NOT NULL,
+  `Nev` varchar(50) NOT NULL,
+  `KepUrl` varchar(255) NOT NULL,
   `Ar` int(11) NOT NULL,
   `TestFormaId` int(11) NOT NULL,
-  `KepUtvonal` varchar(255) NOT NULL,
   `ZIndex` int(11) NOT NULL DEFAULT 20
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `gitar_pickguard`
+--
+
+INSERT INTO `gitar_pickguard` (`Id`, `Nev`, `KepUrl`, `Ar`, `TestFormaId`, `ZIndex`) VALUES
+(1, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FPickguard%2Fblack_pickguard.png', 20000, 1, 20),
+(2, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FPickguard%2Fred_pickguard.png', 30000, 1, 20),
+(3, 'White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FPickguard%2Fwhite_pickguard.png', 25000, 1, 20),
+(4, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard%2Fblack_pickguard.png', 20000, 2, 20),
+(5, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard%2Fred_pickguard.png', 30000, 2, 20),
+(6, 'White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard%2Fwhite_pickguard.png', 25000, 2, 20);
 
 -- --------------------------------------------------------
 
@@ -130,8 +154,16 @@ CREATE TABLE `gitar_testforma` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL,
   `Leiras` varchar(255) DEFAULT NULL,
-  `Ar` int(11) NOT NULL
+  `Ar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `gitar_testforma`
+--
+
+INSERT INTO `gitar_testforma` (`Id`, `Nev`, `Leiras`, `Ar`) VALUES
+(1, 'Stratocaster', NULL, NULL),
+(2, 'Telecaster', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -245,15 +277,6 @@ INSERT INTO `termek_kepek` (`Id`, `TermekId`, `kep1`, `kep2`, `kep3`, `kep4`, `k
 (9, 9, 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep1.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep2.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep3.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep4.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep5.jpg'),
 (10, 10, 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep1.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep2.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep3.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep4.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep5.jpg');
 
--- --------------------------------------------------------
-
---
--- Nézet szerkezete `egyedi_gitar_ar`
---
-DROP TABLE IF EXISTS `egyedi_gitar_ar`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `egyedi_gitar_ar`  AS SELECT `eg`.`Id` AS `EgyediGitarId`, `gt`.`Ar`+ `f`.`Ar` + `pg`.`Ar` + `n`.`Ar` AS `OsszAr` FROM ((((`egyedi_gitar` `eg` join `gitar_testforma` `gt` on(`eg`.`BodyShapeId` = `gt`.`Id`)) join `gitar_finish` `f` on(`eg`.`FinishId` = `f`.`Id`)) join `gitar_pickguard` `pg` on(`eg`.`PickguardId` = `pg`.`Id`)) join `gitar_nyak` `n` on(`eg`.`NeckId` = `n`.`Id`)) ;
-
 --
 -- Indexek a kiírt táblákhoz
 --
@@ -264,7 +287,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 ALTER TABLE `egyedi_gitar`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `FelhasznaloId` (`FelhasznaloId`),
-  ADD KEY `BodyShapeId` (`BodyShapeId`),
+  ADD KEY `BodyShapeId` (`TestformaId`),
   ADD KEY `FinishId` (`FinishId`),
   ADD KEY `PickguardId` (`PickguardId`),
   ADD KEY `fk_eg_neck` (`NeckId`);
@@ -365,7 +388,7 @@ ALTER TABLE `felhasznalo`
 -- AUTO_INCREMENT a táblához `gitar_finish`
 --
 ALTER TABLE `gitar_finish`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_global_elem`
@@ -377,19 +400,19 @@ ALTER TABLE `gitar_global_elem`
 -- AUTO_INCREMENT a táblához `gitar_nyak`
 --
 ALTER TABLE `gitar_nyak`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_pickguard`
 --
 ALTER TABLE `gitar_pickguard`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_testforma`
 --
 ALTER TABLE `gitar_testforma`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_tipus`
@@ -430,7 +453,7 @@ ALTER TABLE `termek_kepek`
 --
 ALTER TABLE `egyedi_gitar`
   ADD CONSTRAINT `egyedi_gitar_ibfk_1` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalo` (`Id`),
-  ADD CONSTRAINT `egyedi_gitar_ibfk_2` FOREIGN KEY (`BodyShapeId`) REFERENCES `gitar_testforma` (`Id`),
+  ADD CONSTRAINT `egyedi_gitar_ibfk_2` FOREIGN KEY (`TestformaId`) REFERENCES `gitar_testforma` (`Id`),
   ADD CONSTRAINT `egyedi_gitar_ibfk_8` FOREIGN KEY (`FinishId`) REFERENCES `gitar_finish` (`Id`),
   ADD CONSTRAINT `egyedi_gitar_ibfk_9` FOREIGN KEY (`PickguardId`) REFERENCES `gitar_pickguard` (`Id`),
   ADD CONSTRAINT `fk_eg_neck` FOREIGN KEY (`NeckId`) REFERENCES `gitar_nyak` (`Id`);
