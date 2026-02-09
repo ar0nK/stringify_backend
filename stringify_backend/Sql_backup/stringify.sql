@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 09. 16:20
+-- Létrehozás ideje: 2026. Feb 09. 16:28
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -38,6 +38,17 @@ CREATE TABLE `egyedi_gitar` (
   `NeckId` int(11) NOT NULL,
   `Letrehozva` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- A nézet helyettes szerkezete `egyedi_gitar_ar`
+-- (Lásd alább az aktuális nézetet)
+--
+CREATE TABLE `egyedi_gitar_ar` (
+`EgyediGitarId` int(11)
+,`OsszAr` bigint(14)
+);
 
 -- --------------------------------------------------------
 
@@ -276,6 +287,15 @@ INSERT INTO `termek_kepek` (`Id`, `TermekId`, `kep1`, `kep2`, `kep3`, `kep4`, `k
 (8, 8, 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F8%2Fkep1.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F8%2Fkep2.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F8%2Fkep3.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F8%2Fkep4.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F8%2Fkep5.jpg'),
 (9, 9, 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep1.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep2.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep3.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep4.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F9%2Fkep5.jpg'),
 (10, 10, 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep1.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep2.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep3.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep4.jpg', 'https://cdn.synk.hu/stringify/Gitarok%2FElektromos%2F10%2Fkep5.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Nézet szerkezete `egyedi_gitar_ar`
+--
+DROP TABLE IF EXISTS `egyedi_gitar_ar`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `egyedi_gitar_ar`  AS SELECT `eg`.`Id` AS `EgyediGitarId`, `gt`.`Ar`+ `f`.`Ar` + `pg`.`Ar` + `n`.`Ar` AS `OsszAr` FROM ((((`egyedi_gitar` `eg` join `gitar_testforma` `gt` on(`eg`.`TestformaId` = `gt`.`Id`)) join `gitar_finish` `f` on(`eg`.`FinishId` = `f`.`Id`)) join `gitar_pickguard` `pg` on(`eg`.`PickguardId` = `pg`.`Id`)) join `gitar_nyak` `n` on(`eg`.`NeckId` = `n`.`Id`)) ;
 
 --
 -- Indexek a kiírt táblákhoz
