@@ -47,15 +47,13 @@ namespace stringify_backend
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add DbContext with Pomelo MySQL provider
             builder.Services.AddDbContext<StringifyDbContext>(options =>
                 options.UseMySql(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
-                    new MySqlServerVersion(new Version(10, 5, 0)) // Adjust to your MariaDB/MySQL version
+                    new MySqlServerVersion(new Version(10, 5, 0))
                 )
             );
 
-            // Add CORS
             builder.Services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options =>
@@ -70,7 +68,6 @@ namespace stringify_backend
 
             var app = builder.Build();
 
-            // Use CORS - MUST BE BEFORE UseHttpsRedirection
             app.UseCors(options =>
                 options.AllowAnyOrigin()
                        .AllowAnyMethod()
@@ -83,7 +80,11 @@ namespace stringify_backend
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
             app.UseAuthorization();
+
             app.MapControllers();
 
             app.Run();
