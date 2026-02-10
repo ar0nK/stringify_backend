@@ -1,6 +1,7 @@
 using stringify_backend.Models;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 
 namespace stringify_backend
 {
@@ -25,6 +26,7 @@ namespace stringify_backend
             }
             return salt;
         }
+
         public static string CreateSHA256(string input)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -38,25 +40,42 @@ namespace stringify_backend
                 return sBuilder.ToString();
             }
         }
+
         public static void Main(string[] args)
         {
             LoggedInUsers["token"] = new User { Id = 1, Jogosultsag = 9 };
+
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
+            // Add DbContext with Pomelo MySQL provider
+            builder.Services.AddDbContext<StringifyDbContext>(options =>
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("DefaultConnection"),
+                    new MySqlServerVersion(new Version(10, 5, 0)) // Adjust to your MariaDB/MySQL version
+                )
+            );
 
-            
+            // Add CORS
+            builder.Services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options =>
+                    options.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+            });
 
             builder.Services.AddControllers();
-           
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            // Use CORS - MUST BE BEFORE UseHttpsRedirection
+            app.UseCors(options =>
+                options.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
 
-            
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -64,10 +83,7 @@ namespace stringify_backend
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

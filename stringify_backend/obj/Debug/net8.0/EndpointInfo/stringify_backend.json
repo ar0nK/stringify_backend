@@ -190,8 +190,8 @@
         }
       }
     },
-    "/api/Login/GetSalt/{felhasznaloNev}": {
-      "post": {
+    "/Login/GetSalt/{felhasznaloNev}": {
+      "get": {
         "tags": [
           "Login"
         ],
@@ -212,7 +212,7 @@
         }
       }
     },
-    "/api/Login": {
+    "/Login": {
       "post": {
         "tags": [
           "Login"
@@ -232,6 +232,68 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Logout": {
+      "post": {
+        "tags": [
+          "Logout"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Register": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDTO"
               }
             }
           }
@@ -315,6 +377,38 @@
           }
         },
         "additionalProperties": false
+      },
+      "LogoutDTO": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterDTO": {
+        "type": "object",
+        "properties": {
+          "nev": {
+            "type": "string",
+            "nullable": true
+          },
+          "jelszo": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefonszam": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       }
     }
   },
@@ -324,6 +418,12 @@
     },
     {
       "name": "Login"
+    },
+    {
+      "name": "Logout"
+    },
+    {
+      "name": "Register"
     }
   ]
 }

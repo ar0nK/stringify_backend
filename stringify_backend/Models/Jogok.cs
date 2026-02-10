@@ -1,19 +1,29 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace stringify_backend.Models
 {
-    public partial class Jogok
+    [Table("jogok")]
+    public class Jogok
     {
+        [Key]
+        [Column("Id")]
         public int Id { get; set; }
 
+        [Required]
+        [Column("Nev")]
+        [MaxLength(32)]
+        public string Nev { get; set; } = string.Empty;
+
+        [Required]
+        [Column("Szint")]
         public int Szint { get; set; }
 
-        public string Nev { get; set; } = null!;
+        [Column("Leiras")]
+        [MaxLength(128)]
+        public string? Leiras { get; set; }
 
-        public string Leiras { get; set; } = null!;
-
-
-        [JsonIgnore]
+        // Navigation property
         public virtual ICollection<User> Users { get; set; } = new List<User>();
     }
 }

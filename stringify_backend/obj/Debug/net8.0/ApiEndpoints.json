@@ -111,7 +111,7 @@
   {
     "ContainingType": "stringify_backend.Controllers.LoginController",
     "Method": "Login",
-    "RelativePath": "api/Login",
+    "RelativePath": "Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -127,14 +127,46 @@
   {
     "ContainingType": "stringify_backend.Controllers.LoginController",
     "Method": "GetSalt",
-    "RelativePath": "api/Login/GetSalt/{felhasznaloNev}",
-    "HttpMethod": "POST",
+    "RelativePath": "Login/GetSalt/{felhasznaloNev}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "felhasznaloNev",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "stringify_backend.Controllers.LogoutController",
+    "Method": "Logout",
+    "RelativePath": "Logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "stringify_backend.Controllers.LogoutDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "stringify_backend.Controllers.RegisterController",
+    "Method": "Register",
+    "RelativePath": "Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "stringify_backend.DTOs.RegisterDTO",
         "IsRequired": true
       }
     ],
