@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\sql_backup\\stringify.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
-      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\sql_backup\\stringify.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\controllers\\logoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\controllers\\logoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\dtos\\loggeduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,6 +21,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\sql_backup\\stringify.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\sql_backup\\stringify.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -59,10 +67,6 @@
       "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|c:\\users\\ricz attila\\documents\\github\\stringify_backend\\stringify_backend\\stringify_backend.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
       "RelativeMoniker": "D:0:0:{3DBA4EF4-ED1C-4651-8C95-55A960B594C9}|stringify_backend\\stringify_backend.csproj|solutionrelative:stringify_backend\\stringify_backend.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
@@ -82,11 +86,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "stringify_backend\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "stringify_backend\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAywCIAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T17:23:09.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "LogoutController.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Controllers\\LogoutController.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Controllers\\LogoutController.cs",
@@ -99,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 2,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "stringify_backend\\Properties\\launchSettings.json",
@@ -112,19 +129,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "stringify_backend",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
               "RelativeDocumentMoniker": "stringify_backend\\stringify_backend.csproj",
               "ToolTip": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
               "RelativeToolTip": "stringify_backend\\stringify_backend.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-10T08:33:13.441Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T08:33:13.441Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\appsettings.json",
               "RelativeDocumentMoniker": "stringify_backend\\appsettings.json",
@@ -132,12 +148,11 @@
               "RelativeToolTip": "stringify_backend\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-10T08:21:28.038Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T08:21:28.038Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "RegisterController.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Controllers\\RegisterController.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Controllers\\RegisterController.cs",
@@ -145,12 +160,11 @@
               "RelativeToolTip": "stringify_backend\\Controllers\\RegisterController.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAvwCsAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.444Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.444Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "RegisterDTO.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\RegisterDTO.cs",
               "RelativeDocumentMoniker": "stringify_backend\\DTOs\\RegisterDTO.cs",
@@ -158,12 +172,11 @@
               "RelativeToolTip": "stringify_backend\\DTOs\\RegisterDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.531Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "EgyediGitar.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\EgyediGitar.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\EgyediGitar.cs",
@@ -171,12 +184,11 @@
               "RelativeToolTip": "stringify_backend\\Models\\EgyediGitar.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.535Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.535Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Program.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Program.cs",
@@ -184,12 +196,11 @@
               "RelativeToolTip": "stringify_backend\\Program.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAA4wEgAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.539Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Controllers\\LoginController.cs",
@@ -197,12 +208,11 @@
               "RelativeToolTip": "stringify_backend\\Controllers\\LoginController.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAAAEoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.542Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.542Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "stringify.sql ",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Sql_backup\\stringify.sql",
               "RelativeDocumentMoniker": "stringify_backend\\Sql_backup\\stringify.sql",
@@ -214,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "LoggedUser.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\LoggedUser.cs",
               "RelativeDocumentMoniker": "stringify_backend\\DTOs\\LoggedUser.cs",
@@ -227,7 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "LoginDTO.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\DTOs\\LoginDTO.cs",
               "RelativeDocumentMoniker": "stringify_backend\\DTOs\\LoginDTO.cs",
@@ -240,7 +250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "StringifyDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\StringifyDbContext.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\StringifyDbContext.cs",
@@ -248,12 +258,11 @@
               "RelativeToolTip": "stringify_backend\\Models\\StringifyDbContext.cs",
               "ViewState": "AgIAAF4AAAAAAAAAAAAswHYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.551Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.551Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "stringify_backend.csproj",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\stringify_backend.csproj",
               "RelativeDocumentMoniker": "stringify_backend\\stringify_backend.csproj",
@@ -261,12 +270,11 @@
               "RelativeToolTip": "stringify_backend\\stringify_backend.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-10T06:30:59.555Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.555Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "EgyediGitarController.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Controllers\\EgyediGitarController.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Controllers\\EgyediGitarController.cs",
@@ -274,12 +282,11 @@
               "RelativeToolTip": "stringify_backend\\Controllers\\EgyediGitarController.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.649Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.649Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\User.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\User.cs",
@@ -287,12 +294,11 @@
               "RelativeToolTip": "stringify_backend\\Models\\User.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAAwCwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.655Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.655Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "Jogok.cs",
               "DocumentMoniker": "C:\\Users\\Ricz Attila\\Documents\\GitHub\\stringify_backend\\stringify_backend\\Models\\Jogok.cs",
               "RelativeDocumentMoniker": "stringify_backend\\Models\\Jogok.cs",
@@ -300,8 +306,7 @@
               "RelativeToolTip": "stringify_backend\\Models\\Jogok.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T06:30:59.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-10T06:30:59.658Z"
             }
           ]
         }

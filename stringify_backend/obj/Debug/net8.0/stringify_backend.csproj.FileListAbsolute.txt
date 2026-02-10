@@ -239,4 +239,3 @@ C:\Users\Ricz Attila\Documents\GitHub\stringify_backend\stringify_backend\bin\De
 C:\Users\Ricz Attila\Documents\GitHub\stringify_backend\stringify_backend\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Ricz Attila\Documents\GitHub\stringify_backend\stringify_backend\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Ricz Attila\Documents\GitHub\stringify_backend\stringify_backend\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\Ricz Attila\Documents\GitHub\stringify_backend\stringify_backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

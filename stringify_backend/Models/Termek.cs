@@ -9,7 +9,7 @@ public partial class Termek
     public string Leiras { get; set; } = null!;
     public string? RovidLeiras { get; set; }
     public int Ar { get; set; }
-    public sbyte Elerheto { get; set; }
+    public bool Elerheto { get; set; }
     public int? GitarTipusId { get; set; }
     public DateTime? Letrehozva { get; set; }
 

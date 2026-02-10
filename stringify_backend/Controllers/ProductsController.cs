@@ -1,96 +1,57 @@
-import { useEffect, useState } from "react";
-import Card from "../components/Card.jsx";
-import NavBar from "../components/NavBar.jsx";
-import Filters from "../components/Filters.jsx";
-import { useAuth } from "../context/AuthContext"; // <-- igazítsd az útvonalat
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using stringify_backend.Dtos;
+using stringify_backend.Models;
 
-export default function Store() {
-  const { apiBase, authHeaders } = useAuth();
-  const [guitars, setGuitars] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+namespace Stringify.Api.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProductsController : ControllerBase
+    {
+        private readonly StringifyDbContext _db;
 
-  useEffect(() => {
-    let cancelled = false;
-
-    (async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        // Itt az endpointot igazítsd ahhoz, amit a backendben létrehozol:
-        // pl. `${apiBase}/api/products` vagy `${apiBase}/Products`
-        const res = await fetch(`${apiBase}/api/products`, {
-          method: "GET",
-          headers: authHeaders(), // ha nem kell auth, mehet simán {} is
-        });
-
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(text || `HTTP ${res.status}`);
+        public ProductsController(StringifyDbContext db)
+        {
+            _db = db;
         }
 
-        const data = await res.json();
-        if (!cancelled) setGuitars(data);
-      } catch (e) {
-        console.error(e);
-        if (!cancelled) setError("Nem sikerült betölteni a termékeket.");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
+        [HttpGet]
+        public async Task<ActionResult<List<ProductDto>>> GetAll()
+        {
+            var products = await _db.Termekek
+                .AsNoTracking()
+                .Include(t => t.TermekKepek)
+                .OrderByDescending(t => t.Letrehozva)
+                .Select(t => new ProductDto
+                {
+                    Id = t.Id,
+                    Title = t.Nev,
+                    ShortDescription = t.RovidLeiras,
+                    LongDescription = t.Leiras,
+                    PreviewDescription = t.RovidLeiras ?? "",
 
-    return () => (cancelled = true);
-  }, [apiBase, authHeaders]);
+                    Price = t.Ar,
+                    IsAvailable = t.Elerheto,
 
-  return (
-    <div>
-      <NavBar />
-      <div className="container-fluid mt-4 px-lg-5">
-        <div className="row">
-          <aside className="col-12 col-lg-2 mb-4 pe-lg-5">
-            <div
-              className="d-none d-lg-block position-sticky"
-              style={{ top: "50vh", transform: "translateY(-50%)" }}
-            >
-              <Filters />
-            </div>
-            <div className="d-lg-none">
-              <Filters />
-            </div>
-          </aside>
+                    Images = new List<string>
+                    {
+                        t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep2 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
+                    }
+                    .AsEnumerable()
+                    .Where(url => !string.IsNullOrWhiteSpace(url))
+                    .ToList(),
 
-          <section className="col-12 col-lg-10 ps-lg-5">
-            {loading && <div className="py-4">Betöltés...</div>}
-            {error && <div className="alert alert-danger">{error}</div>}
+                    Rating = null,
+                    ReviewCount = null
+                })
+                .ToListAsync();
 
-            {!loading && !error && (
-              <div className="row g-5">
-                {guitars.map((guitar) => (
-                  <div
-                    key={guitar.id}
-                    className="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex"
-                  >
-                    <Card
-                      id={guitar.id}
-                      images={guitar.images?.length ? guitar.images : []}
-                      title={guitar.title}
-                      rating={guitar.rating}
-                      reviewCount={guitar.reviewCount}
-                      shortDescription={guitar.shortDescription}
-                      longDescription={guitar.longDescription}
-                      previewDescription={guitar.previewDescription}
-                      isAvailable={guitar.isAvailable}
-                      price={guitar.price}
-                      onAddToCart={() => console.log(`${guitar.title} added to cart`)}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        </div>
-      </div>
-    </div>
-  );
+            return Ok(products);
+        }
+    }
 }
