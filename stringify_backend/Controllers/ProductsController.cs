@@ -36,20 +36,26 @@ namespace Stringify.Api.Controllers
 
                     Images = new List<string>
                     {
-                        t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
-                        t.TermekKepek != null ? t.TermekKepek.Kep2 : "",
-                        t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
-                        t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
-                        t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
-                    }
-                    .AsEnumerable()
-                    .Where(url => !string.IsNullOrWhiteSpace(url))
-                    .ToList(),
+                t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
+                t.TermekKepek != null ? t.TermekKepek.Kep2 : "",
+                t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
+                t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
+                t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
+                    },
+                    // Remove the .AsEnumerable().Where().ToList() here
 
                     Rating = null,
                     ReviewCount = null
                 })
                 .ToListAsync();
+
+            // Filter empty images AFTER retrieving from database
+            foreach (var product in products)
+            {
+                product.Images = product.Images
+                    .Where(url => !string.IsNullOrWhiteSpace(url))
+                    .ToList();
+            }
 
             return Ok(products);
         }
