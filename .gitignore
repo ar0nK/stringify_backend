@@ -1,0 +1,106 @@
+# Build artifacts
+bin/
+obj/
+*.o
+*.a
+*.so
+
+# IDE and Editor files
+.vscode/
+.vs/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+.vscode/settings.json
+.vscode/launch.json
+*.sln.iml
+
+# Local environment configuration
+appsettings.Development.json
+.env
+.env.local
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# Logs
+logs/
+*.log
+
+# Test Results
+TestResults/
+*.trx
+
+# OS specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# NuGet and Package files
+*.nupkg
+*.snupkg
+/packages
+*.nuget.props
+*.nuget.targets
+*.nupkg.metadata.txt
+
+# Build results and generated files
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# MSBuild and auto-generated files
+*.AssemblyInfo.cs
+*.GlobalUsings.g.cs
+*.editorconfig
+project.assets.json
+*.project.assets.json
+*.csproj.FileListAbsolute.txt
+*.csproj.BuildWithSkipAnalyzers
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.GeneratedMSBuildEditorConfig.editorconfig
+
+# Cache files
+*.cache
+*.ymlnlputs.cache
+*.assets.cache
+*.yRference.cache
+project.nuget.cache
+rjsmcshtml.dswa.cache.json
+rjsmrazor.dswa.cache.json
+rpswa.dswa.cache.json
+staticwebassets.*.cache
+staticwebassets.development.json
+staticwebassets.build.json
+staticwebassets.pack.json
+staticwebassets.references.upToDateCheck.txt
+staticwebassets.removed.txt
+*.dswa.cache.json
+
+# Rider cache
+.idea/
+
+# Runtime and temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.exe
+
+# Docker build output and temporary files (exclude these from git but .dockerignore handles Docker builds)
+.dockerignore
