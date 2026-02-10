@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 09. 16:28
+-- Létrehozás ideje: 2026. Feb 10. 12:08
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -61,9 +61,19 @@ CREATE TABLE `felhasznalo` (
   `Nev` varchar(100) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Jelszo` varchar(255) NOT NULL,
+  `SALT` varchar(64) NOT NULL,
   `Telefonszam` varchar(30) DEFAULT NULL,
-  `Jogosultsag` tinyint(1) NOT NULL
+  `Jogosultsag` tinyint(1) NOT NULL,
+  `Aktiv` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `felhasznalo`
+--
+
+INSERT INTO `felhasznalo` (`Id`, `Nev`, `Email`, `Jelszo`, `SALT`, `Telefonszam`, `Jogosultsag`, `Aktiv`) VALUES
+(1, 'teszt teszt', 'teszt@gmail.com', 'c74fc60fe5a0914e84da66d74cc483e6a9eea362780166f0d79ecda3902bc2dd', 'UAVUnYeQ5reKKUtPJ3reu6JBZeUwNskm1Ck65wXGnt38uQSKjgS1RC09LmQegzMK', '4325873487', 1, 1),
+(2, 'teszt teszt2', 'teszt2@gmail.com', 'e734b8206e82fe0341278618ba053503bae0fee25a024e87986bd0aa5b1024d8', 'jXmrZZVPFoDIiuVINUTn2Pr7GjZy1YBjdDTxv23CeBRbVrDZyahOUl1Pjd3jOXNY', '123456789', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -402,7 +412,7 @@ ALTER TABLE `egyedi_gitar`
 -- AUTO_INCREMENT a táblához `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_finish`
