@@ -109,6 +109,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Stringify.Api.Controllers.SingleProductController",
+    "Method": "GetAll",
+    "RelativePath": "api/products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[stringify_backend.Dtos.ProductDto, stringify_backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Stringify.Api.Controllers.ProductsController",
     "Method": "GetAll",
     "RelativePath": "api/Products",
@@ -119,6 +139,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[stringify_backend.Dtos.ProductDto, stringify_backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Stringify.Api.Controllers.SingleProductController",
+    "Method": "GetById",
+    "RelativePath": "api/products/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "stringify_backend.Dtos.ProductDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
