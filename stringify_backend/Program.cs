@@ -47,13 +47,6 @@ namespace stringify_backend
 
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<StringifyDbContext>(options =>
-                options.UseMySql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    new MySqlServerVersion(new Version(10, 5, 0))
-                )
-            );
-
             builder.Services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options =>
@@ -61,6 +54,22 @@ namespace stringify_backend
                            .AllowAnyMethod()
                            .AllowAnyHeader());
             });
+            builder.Services.AddDbContext<StringifyDbContext>(options =>
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("DefaultConnection"),
+                    new MySqlServerVersion(new Version(10, 5, 0))
+                )
+            );
+
+            /*builder.Services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options =>
+                    options.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+
+            });*/
+
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -68,10 +77,7 @@ namespace stringify_backend
 
             var app = builder.Build();
 
-            app.UseCors(options =>
-                options.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader());
+            app.UseCors("AllowOrigin");
 
             if (app.Environment.IsDevelopment())
             {

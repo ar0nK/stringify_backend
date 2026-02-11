@@ -6,7 +6,7 @@ using stringify_backend.Models;
 namespace Stringify.Api.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/product_info")]
     public class SingleProductController : ControllerBase
     {
         private readonly StringifyDbContext _db;
@@ -17,7 +17,7 @@ namespace Stringify.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetAll()
+        public async Task<ActionResult<List<ProductDto>>> GetSingle()
         {
             var products = await _db.Termekek
                 .AsNoTracking()
