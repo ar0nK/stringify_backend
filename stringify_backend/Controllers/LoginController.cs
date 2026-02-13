@@ -16,13 +16,13 @@ namespace stringify_backend.Controllers
             _context = context;
         }
 
-        [HttpGet("GetSalt/{felhasznaloNev}")]
-        public async Task<IActionResult> GetSalt(string felhasznaloNev)
+        [HttpGet("GetSalt/{email}")]
+        public async Task<IActionResult> GetSalt(string email)
         {
             try
             {
                 User response = await _context.Users
-                    .FirstOrDefaultAsync(f => f.Nev == felhasznaloNev);
+                    .FirstOrDefaultAsync(f => f.Email == email);
 
                 return response == null
                     ? BadRequest("Felhasználó nem található")
@@ -42,7 +42,7 @@ namespace stringify_backend.Controllers
                 string Hash = Program.CreateSHA256(loginDTO.TmpHash);
 
                 User loggedUser = await _context.Users
-                    .FirstOrDefaultAsync(f => f.Nev == loginDTO.LoginName && f.Jelszo == Hash);
+                    .FirstOrDefaultAsync(f => f.Email == loginDTO.Email && f.Jelszo == Hash);
 
                 if (loggedUser != null && loggedUser.Aktiv == 1)
                 {
@@ -63,7 +63,7 @@ namespace stringify_backend.Controllers
                 }
                 else
                 {
-                    return BadRequest("Hibás név vagy jelszó/inaktív felhasználó!");
+                    return BadRequest("Hibás email vagy jelszó/inaktív felhasználó!");
                 }
             }
             catch (Exception ex)

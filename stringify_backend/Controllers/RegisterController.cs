@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using stringify_backend.DTOs;
 using stringify_backend.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace stringify_backend.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class RegisterController : ControllerBase
     {
         private readonly StringifyDbContext _context;
@@ -17,48 +19,55 @@ namespace stringify_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
+        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
             try
             {
-                // Validate input
-                if (string.IsNullOrWhiteSpace(dto.Nev) ||
-                    string.IsNullOrWhiteSpace(dto.Email) ||
-                    string.IsNullOrWhiteSpace(dto.Jelszo))
-                {
-                    return BadRequest("Minden mező kitöltése kötelező.");
-                }
-
                 // Check if email already exists
-                if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+                var existingUser = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == registerDTO.Email);
+
+                if (existingUser != null)
                 {
-                    return BadRequest("Ez az email már regisztrált.");
+                    return BadRequest("Ez az email cím már használatban van!");
                 }
 
-                // Generate salt and hash password
-                string salt = Program.GenerateSalt();
-                string hashedPassword = Program.CreateSHA256(dto.Jelszo + salt);
+                string salt = GenerateRandomSalt();
 
-                var user = new User
+                string tmpHash = Program.CreateSHA256(registerDTO.Jelszo + salt);
+
+                string finalHash = Program.CreateSHA256(tmpHash);
+
+                var newUser = new User
                 {
-                    Nev = dto.Nev,
-                    Email = dto.Email,
-                    Telefonszam = dto.Telefonszam ?? "",
+                    Nev = registerDTO.Nev,
+                    Email = registerDTO.Email,
+                    Telefonszam = registerDTO.Telefonszam,
+                    Jelszo = finalHash,
                     Salt = salt,
-                    Jelszo = hashedPassword,
                     Jogosultsag = 1,
-                    Aktiv = 1
+                    Aktiv = 1 
                 };
 
-                _context.Users.Add(user);
+                _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
-                return Ok("Sikeres regisztráció!");
+                return Ok("Sikeres regisztráció! Most már bejelentkezhetsz.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Hiba történt: {ex.Message}");
+                return BadRequest($"Hiba történt a regisztráció során: {ex.Message}");
             }
+        }
+
+        private string GenerateRandomSalt()
+        {
+            byte[] saltBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(saltBytes);
+            }
+            return Convert.ToBase64String(saltBytes);
         }
     }
 }
