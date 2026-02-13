@@ -4,6 +4,9 @@ obj/
 *.o
 *.a
 *.so
+*.dll
+*.exe
+*.pdb    
 
 # IDE and Editor files
 .vscode/
@@ -104,3 +107,9 @@ staticwebassets.removed.txt
 
 # Docker build output and temporary files (exclude these from git but .dockerignore handles Docker builds)
 .dockerignore
+
+stringify_backend/bin/Debug/net8.0/stringify_backend.deps.json
+stringify_backend/bin/Debug/net8.0/stringify_backend.dll
+stringify_backend/bin/Debug/net8.0/stringify_backend.exe
+stringify_backend/bin/Debug/net8.0/stringify_backend.pdb
+stringify_backend/bin/Debug/net8.0/stringify_backend.staticwebassets.runtime.json
