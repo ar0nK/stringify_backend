@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 10. 12:08
+-- Létrehozás ideje: 2026. Feb 13. 11:04
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -209,6 +209,26 @@ INSERT INTO `gitar_tipus` (`Id`, `Nev`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `kedvenc_termek`
+--
+
+CREATE TABLE `kedvenc_termek` (
+  `Id` int(11) NOT NULL,
+  `FelhasznaloId` int(11) NOT NULL,
+  `TermekId` int(11) NOT NULL,
+  `Letrehozva` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `kedvenc_termek`
+--
+
+INSERT INTO `kedvenc_termek` (`Id`, `FelhasznaloId`, `TermekId`, `Letrehozva`) VALUES
+(1, 1, 2, '2026-02-13 11:00:04');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `rendeles`
 --
 
@@ -369,6 +389,14 @@ ALTER TABLE `gitar_tipus`
   ADD UNIQUE KEY `Nev` (`Nev`);
 
 --
+-- A tábla indexei `kedvenc_termek`
+--
+ALTER TABLE `kedvenc_termek`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `unique_kedvenc` (`FelhasznaloId`,`TermekId`),
+  ADD KEY `fk_kedvenc_termek` (`TermekId`);
+
+--
 -- A tábla indexei `rendeles`
 --
 ALTER TABLE `rendeles`
@@ -451,6 +479,12 @@ ALTER TABLE `gitar_tipus`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT a táblához `kedvenc_termek`
+--
+ALTER TABLE `kedvenc_termek`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT a táblához `rendeles`
 --
 ALTER TABLE `rendeles`
@@ -499,6 +533,13 @@ ALTER TABLE `gitar_finish`
 --
 ALTER TABLE `gitar_pickguard`
   ADD CONSTRAINT `fk_pickguard_testforma` FOREIGN KEY (`TestFormaId`) REFERENCES `gitar_testforma` (`Id`);
+
+--
+-- Megkötések a táblához `kedvenc_termek`
+--
+ALTER TABLE `kedvenc_termek`
+  ADD CONSTRAINT `fk_kedvenc_felhasznalo` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalo` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_kedvenc_termek` FOREIGN KEY (`TermekId`) REFERENCES `termek` (`Id`) ON DELETE CASCADE;
 
 --
 -- Megkötések a táblához `rendeles`
