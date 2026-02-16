@@ -18,9 +18,9 @@ public partial class StringifyDbContext : DbContext
     public virtual DbSet<Jogok> Jogoks { get; set; }
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<EgyediGitar> EgyediGitarok { get; set; }
-
     public virtual DbSet<Termek> Termekek { get; set; }
     public virtual DbSet<TermekKepek> TermekKepek { get; set; }
+    public virtual DbSet<KedvencTermek> KedvencTermekek { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -146,6 +146,36 @@ public partial class StringifyDbContext : DbContext
             entity.Property(e => e.Kep5).HasMaxLength(255).HasColumnName("kep5");
 
             entity.HasIndex(e => e.TermekId).HasDatabaseName("TermekId");
+        });
+
+        modelBuilder.Entity<KedvencTermek>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.ToTable("kedvenc_termek");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)").HasColumnName("Id");
+            entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)").HasColumnName("FelhasznaloId");
+            entity.Property(e => e.TermekId).HasColumnType("int(11)").HasColumnName("TermekId");
+            entity.Property(e => e.Letrehozva).HasColumnType("datetime").HasColumnName("Letrehozva");
+
+            entity.HasIndex(e => new { e.FelhasznaloId, e.TermekId })
+                .IsUnique()
+                .HasDatabaseName("unique_kedvenc");
+
+            entity.HasIndex(e => e.FelhasznaloId).HasDatabaseName("FelhasznaloId");
+            entity.HasIndex(e => e.TermekId).HasDatabaseName("fk_kedvenc_termek");
+
+            entity.HasOne(e => e.Felhasznalo)
+                .WithMany()
+                .HasForeignKey(e => e.FelhasznaloId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_kedvenc_felhasznalo");
+
+            entity.HasOne(e => e.Termek)
+                .WithMany()
+                .HasForeignKey(e => e.TermekId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_kedvenc_termek");
         });
 
         OnModelCreatingPartial(modelBuilder);
