@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using stringify_backend.Models;
 
 namespace stringify_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class KedvencTermekController : ControllerBase
     {
         private readonly StringifyDbContext _context;
@@ -15,32 +18,24 @@ namespace stringify_backend.Controllers
             _context = context;
         }
 
-        // Helper method to get current user from token
-        private User? GetCurrentUser()
+        // Helper method to get current user from JWT claims
+        private async Task<User?> GetCurrentUserAsync()
         {
-            var token = Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", "");
+            var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (string.IsNullOrEmpty(token))
+            if (!int.TryParse(userIdValue, out var userId))
             {
                 return null;
             }
 
-            lock (Program.LoggedInUsers)
-            {
-                if (Program.LoggedInUsers.ContainsKey(token))
-                {
-                    return Program.LoggedInUsers[token];
-                }
-            }
-
-            return null;
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId && u.Aktiv == 1);
         }
 
         // GET: api/kedvencetermek - Get all favorites for logged-in user
         [HttpGet]
         public async Task<ActionResult<IEnumerable<int>>> GetUserFavorites()
         {
-            var currentUser = GetCurrentUser();
+            var currentUser = await GetCurrentUserAsync();
             if (currentUser == null)
             {
                 return Unauthorized("Kérjük, jelentkezz be!");
@@ -58,7 +53,7 @@ namespace stringify_backend.Controllers
         [HttpGet("products")]
         public async Task<ActionResult> GetUserFavoriteProducts()
         {
-            var currentUser = GetCurrentUser();
+            var currentUser = await GetCurrentUserAsync();
             if (currentUser == null)
             {
                 return Unauthorized("Kérjük, jelentkezz be!");
@@ -102,7 +97,7 @@ namespace stringify_backend.Controllers
         [HttpPost("{termekId}")]
         public async Task<IActionResult> AddFavorite(int termekId)
         {
-            var currentUser = GetCurrentUser();
+            var currentUser = await GetCurrentUserAsync();
             if (currentUser == null)
             {
                 return Unauthorized("Kérjük, jelentkezz be!");
@@ -142,7 +137,7 @@ namespace stringify_backend.Controllers
         [HttpDelete("{termekId}")]
         public async Task<IActionResult> RemoveFavorite(int termekId)
         {
-            var currentUser = GetCurrentUser();
+            var currentUser = await GetCurrentUserAsync();
             if (currentUser == null)
             {
                 return Unauthorized("Kérjük, jelentkezz be!");
@@ -165,7 +160,7 @@ namespace stringify_backend.Controllers
         [HttpPost("toggle/{termekId}")]
         public async Task<IActionResult> ToggleFavorite(int termekId)
         {
-            var currentUser = GetCurrentUser();
+            var currentUser = await GetCurrentUserAsync();
             if (currentUser == null)
             {
                 return Unauthorized("Kérjük, jelentkezz be!");

@@ -9,20 +9,7 @@ namespace stringify_backend.Controllers
         [HttpPost]
         public IActionResult Logout([FromBody] LogoutDTO dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Token))
-            {
-                return BadRequest("Token hiányzik.");
-            }
-
-            lock (Program.LoggedInUsers)
-            {
-                if (Program.LoggedInUsers.ContainsKey(dto.Token))
-                {
-                    Program.LoggedInUsers.Remove(dto.Token);
-                }
-            }
-
-            return Ok("Sikeres kijelentkezés.");
+            return Ok("Sikeres kijelentkezés. A kliens oldalon távolítsd el a tokent.");
         }
     }
 

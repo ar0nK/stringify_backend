@@ -1,7 +1,9 @@
-using stringify_backend.Models;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using stringify_backend.Models;
 
 namespace stringify_backend
 {
@@ -12,8 +14,6 @@ namespace stringify_backend
         public static string ftpPassword = "";
 
         public static int SaltLength = 64;
-
-        public static Dictionary<string, User> LoggedInUsers = new Dictionary<string, User>();
 
         public static string GenerateSalt()
         {
@@ -43,8 +43,6 @@ namespace stringify_backend
 
         public static void Main(string[] args)
         {
-            LoggedInUsers["token"] = new User { Id = 1, Jogosultsag = 9 };
-
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddCors(c =>
@@ -60,6 +58,31 @@ namespace stringify_backend
                     new MySqlServerVersion(new Version(10, 5, 0))
                 )
             );
+
+            var jwtSection = builder.Configuration.GetSection("Jwt");
+            var jwtKey = jwtSection.GetValue<string>("Key") ?? string.Empty;
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSection.GetValue<string>("Issuer"),
+                    ValidAudience = jwtSection.GetValue<string>("Audience"),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+                    ClockSkew = TimeSpan.FromMinutes(1)
+                };
+            });
+
+            builder.Services.AddAuthorization();
 
             /*builder.Services.AddCors(c =>
             {
@@ -89,6 +112,7 @@ namespace stringify_backend
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
