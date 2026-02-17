@@ -59,36 +59,37 @@ namespace stringify_backend.Controllers
                 return Unauthorized("Kérjük, jelentkezz be!");
             }
 
-            var favoriteProducts = await _context.KedvencTermekek
+            var raw = await _context.KedvencTermekek
                 .Where(kt => kt.FelhasznaloId == currentUser.Id)
                 .Include(kt => kt.Termek)
                 .ThenInclude(t => t.TermekKepek)
-                .Select(kt => new
-                {
-                    id = kt.Termek.Id,
-                    title = kt.Termek.Nev,
-                    shortDescription = kt.Termek.RovidLeiras,
-                    longDescription = kt.Termek.Leiras,
-                    previewDescription = kt.Termek.RovidLeiras ?? "",
-                    price = kt.Termek.Ar,
-                    isAvailable = kt.Termek.Elerheto,
-                    images = kt.Termek.TermekKepek != null
-                        ? new List<string>
-                        {
-                            kt.Termek.TermekKepek.Kep1,
-                            kt.Termek.TermekKepek.Kep2,
-                            kt.Termek.TermekKepek.Kep3,
-                            kt.Termek.TermekKepek.Kep4,
-                            kt.Termek.TermekKepek.Kep5
-                        }
-                        .Where(url => !string.IsNullOrWhiteSpace(url))
-                        .ToList()
-                        : new List<string>(),
-                    rating = (double?)null,
-                    reviewCount = (int?)null,
-                    savedAt = kt.Letrehozva
-                })
                 .ToListAsync();
+
+            var favoriteProducts = raw.Select(kt => new
+            {
+                id = kt.Termek.Id,
+                title = kt.Termek.Nev,
+                shortDescription = kt.Termek.RovidLeiras,
+                longDescription = kt.Termek.Leiras,
+                previewDescription = kt.Termek.RovidLeiras ?? "",
+                price = kt.Termek.Ar,
+                isAvailable = kt.Termek.Elerheto,
+                images = kt.Termek.TermekKepek != null
+                    ? new List<string>
+                    {
+                        kt.Termek.TermekKepek.Kep1,
+                        kt.Termek.TermekKepek.Kep2,
+                        kt.Termek.TermekKepek.Kep3,
+                        kt.Termek.TermekKepek.Kep4,
+                        kt.Termek.TermekKepek.Kep5
+                    }
+                    .Where(url => !string.IsNullOrWhiteSpace(url))
+                    .ToList()
+                    : new List<string>(),
+                rating = (double?)null,
+                reviewCount = (int?)null,
+                savedAt = kt.Letrehozva
+            });
 
             return Ok(favoriteProducts);
         }
