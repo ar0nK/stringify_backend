@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 17. 10:52
+-- Létrehozás ideje: 2026. Feb 18. 11:19
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -62,7 +62,6 @@ CREATE TABLE `felhasznalo` (
   `Email` varchar(255) NOT NULL,
   `Jelszo` varchar(255) NOT NULL,
   `SALT` varchar(64) NOT NULL,
-  `Telefonszam` varchar(30) DEFAULT NULL,
   `Jogosultsag` tinyint(1) NOT NULL,
   `Aktiv` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
@@ -71,9 +70,9 @@ CREATE TABLE `felhasznalo` (
 -- A tábla adatainak kiíratása `felhasznalo`
 --
 
-INSERT INTO `felhasznalo` (`Id`, `Nev`, `Email`, `Jelszo`, `SALT`, `Telefonszam`, `Jogosultsag`, `Aktiv`) VALUES
-(1, 'teszt teszt', 'teszt@gmail.com', 'c74fc60fe5a0914e84da66d74cc483e6a9eea362780166f0d79ecda3902bc2dd', 'UAVUnYeQ5reKKUtPJ3reu6JBZeUwNskm1Ck65wXGnt38uQSKjgS1RC09LmQegzMK', '4325873487', 1, 1),
-(2, 'teszt teszt2', 'teszt2@gmail.com', 'e734b8206e82fe0341278618ba053503bae0fee25a024e87986bd0aa5b1024d8', 'jXmrZZVPFoDIiuVINUTn2Pr7GjZy1YBjdDTxv23CeBRbVrDZyahOUl1Pjd3jOXNY', '123456789', 1, 1);
+INSERT INTO `felhasznalo` (`Id`, `Nev`, `Email`, `Jelszo`, `SALT`, `Jogosultsag`, `Aktiv`) VALUES
+(1, 'teszt teszt', 'teszt@gmail.com', 'c74fc60fe5a0914e84da66d74cc483e6a9eea362780166f0d79ecda3902bc2dd', 'UAVUnYeQ5reKKUtPJ3reu6JBZeUwNskm1Ck65wXGnt38uQSKjgS1RC09LmQegzMK', 1, 1),
+(2, 'teszt teszt2', 'teszt2@gmail.com', 'e734b8206e82fe0341278618ba053503bae0fee25a024e87986bd0aa5b1024d8', 'jXmrZZVPFoDIiuVINUTn2Pr7GjZy1YBjdDTxv23CeBRbVrDZyahOUl1Pjd3jOXNY', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -238,6 +237,22 @@ CREATE TABLE `rendeles` (
   `Osszeg` int(11) NOT NULL,
   `Status` varchar(30) NOT NULL,
   `Datum` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `rendeles_cimek`
+--
+
+CREATE TABLE `rendeles_cimek` (
+  `Id` int(11) NOT NULL,
+  `FelhasznaloId` int(11) NOT NULL,
+  `iranyitoszam` int(4) NOT NULL,
+  `varos` varchar(30) NOT NULL,
+  `utca_hazszam` varchar(50) NOT NULL,
+  `telefonszam` varchar(15) NOT NULL,
+  `szamlazasi/szallitasi` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -424,6 +439,13 @@ ALTER TABLE `rendeles`
   ADD KEY `FelhasznaloId` (`FelhasznaloId`);
 
 --
+-- A tábla indexei `rendeles_cimek`
+--
+ALTER TABLE `rendeles_cimek`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `FelhasznaloId` (`FelhasznaloId`);
+
+--
 -- A tábla indexei `rendeles_tetel`
 --
 ALTER TABLE `rendeles_tetel`
@@ -511,6 +533,12 @@ ALTER TABLE `rendeles`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT a táblához `rendeles_cimek`
+--
+ALTER TABLE `rendeles_cimek`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT a táblához `rendeles_tetel`
 --
 ALTER TABLE `rendeles_tetel`
@@ -566,6 +594,12 @@ ALTER TABLE `kedvenc_termek`
 --
 ALTER TABLE `rendeles`
   ADD CONSTRAINT `rendeles_ibfk_1` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalo` (`Id`);
+
+--
+-- Megkötések a táblához `rendeles_cimek`
+--
+ALTER TABLE `rendeles_cimek`
+  ADD CONSTRAINT `rendeles_cimek_ibfk_1` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalo` (`Id`);
 
 --
 -- Megkötések a táblához `rendeles_tetel`
