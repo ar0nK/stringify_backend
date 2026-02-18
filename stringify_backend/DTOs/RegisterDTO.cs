@@ -5,6 +5,5 @@
         public string Nev { get; set; }
         public string Jelszo { get; set; }
         public string Email { get; set; }
-        public string Telefonszam { get; set; }
     }
 }

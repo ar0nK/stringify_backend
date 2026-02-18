@@ -20,10 +20,6 @@ namespace stringify_backend.Models
         [MaxLength(255)]
         public string Email { get; set; } = string.Empty;
 
-        [Column("Telefonszam")]
-        [MaxLength(30)]
-        public string Telefonszam { get; set; } = string.Empty;
-
         [Required]
         [Column("Jelszo")]
         [MaxLength(64)]
