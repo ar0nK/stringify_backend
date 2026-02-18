@@ -46,7 +46,6 @@ public partial class StringifyDbContext : DbContext
             entity.ToTable("felhasznalo");
 
             entity.HasIndex(e => e.Email, "Email").IsUnique();
-            entity.HasIndex(e => e.Telefonszam, "Telefonszam");
             entity.HasIndex(e => e.Nev, "Nev");
             entity.HasIndex(e => e.Jogosultsag, "Jogosultsag");
 
@@ -61,10 +60,6 @@ public partial class StringifyDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("Email");
-
-            entity.Property(e => e.Telefonszam)
-                .HasMaxLength(30)
-                .HasColumnName("Telefonszam");
 
             entity.Property(e => e.Nev)
                 .HasMaxLength(60)

@@ -42,7 +42,6 @@ namespace stringify_backend.Controllers
                 {
                     Nev = registerDTO.Nev,
                     Email = registerDTO.Email,
-                    Telefonszam = registerDTO.Telefonszam,
                     Jelszo = finalHash,
                     Salt = salt,
                     Jogosultsag = 1,
