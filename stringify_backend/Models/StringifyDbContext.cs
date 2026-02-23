@@ -66,12 +66,8 @@ public partial class StringifyDbContext : DbContext
             entity.ToTable("egyedi_gitar");
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)");
-            entity.Property(e => e.BodyShapeId).HasColumnType("int(11)");
-            entity.Property(e => e.BodyWoodId).HasColumnType("int(11)");
-            entity.Property(e => e.NeckWoodId).HasColumnType("int(11)");
-            entity.Property(e => e.NeckPickupId).HasColumnType("int(11)");
-            entity.Property(e => e.MiddlePickupId).HasColumnType("int(11)");
-            entity.Property(e => e.BridgePickupId).HasColumnType("int(11)");
+            entity.Property(e => e.TestformaId).HasColumnType("int(11)");
+            entity.Property(e => e.NeckId).HasColumnType("int(11)");
             entity.Property(e => e.FinishId).HasColumnType("int(11)");
             entity.Property(e => e.PickguardId).HasColumnType("int(11)");
             entity.Property(e => e.Letrehozva).HasColumnType("datetime");
