@@ -23,6 +23,10 @@ public partial class StringifyDbContext : DbContext
     public virtual DbSet<KedvencTermek> KedvencTermekek { get; set; }
     public virtual DbSet<Rendeles> Rendelesek { get; set; }
     public virtual DbSet<RendelesTetel> RendelesTetelek { get; set; }
+    public virtual DbSet<GitarTestforma> GitarTestformak { get; set; }
+    public virtual DbSet<GitarFinish> GitarFinishek { get; set; }
+    public virtual DbSet<GitarPickguard> GitarPickguardok { get; set; }
+    public virtual DbSet<GitarNyak> GitarNyakak { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -165,6 +169,63 @@ public partial class StringifyDbContext : DbContext
                 .HasForeignKey(e => e.EgyediGitarId)
                 .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("rendeles_tetel_ibfk_3");
+        });
+
+        modelBuilder.Entity<GitarTestforma>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.ToTable("gitar_testforma");
+            entity.Property(e => e.Id).HasColumnType("int(11)").HasColumnName("Id");
+            entity.Property(e => e.Nev).HasMaxLength(50).HasColumnName("Nev");
+            entity.Property(e => e.Leiras).HasMaxLength(255).HasColumnName("Leiras");
+            entity.Property(e => e.Ar).HasColumnType("int(11)").HasColumnName("Ar");
+        });
+
+        modelBuilder.Entity<GitarFinish>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.ToTable("gitar_finish");
+            entity.Property(e => e.Id).HasColumnType("int(11)").HasColumnName("Id");
+            entity.Property(e => e.Nev).HasMaxLength(50).HasColumnName("Nev");
+            entity.Property(e => e.KepUrl).HasMaxLength(255).HasColumnName("KepUrl");
+            entity.Property(e => e.Ar).HasColumnType("int(11)").HasColumnName("Ar");
+            entity.Property(e => e.TestFormaId).HasColumnType("int(11)").HasColumnName("TestFormaId");
+            entity.Property(e => e.ZIndex).HasColumnType("int(11)").HasColumnName("ZIndex");
+            entity.HasIndex(e => e.TestFormaId).HasDatabaseName("fk_finish_testforma");
+            entity.HasOne<GitarTestforma>()
+                .WithMany()
+                .HasForeignKey(e => e.TestFormaId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("fk_finish_testforma");
+        });
+
+        modelBuilder.Entity<GitarPickguard>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.ToTable("gitar_pickguard");
+            entity.Property(e => e.Id).HasColumnType("int(11)").HasColumnName("Id");
+            entity.Property(e => e.Nev).HasMaxLength(50).HasColumnName("Nev");
+            entity.Property(e => e.KepUrl).HasMaxLength(255).HasColumnName("KepUrl");
+            entity.Property(e => e.Ar).HasColumnType("int(11)").HasColumnName("Ar");
+            entity.Property(e => e.TestFormaId).HasColumnType("int(11)").HasColumnName("TestFormaId");
+            entity.Property(e => e.ZIndex).HasColumnType("int(11)").HasColumnName("ZIndex");
+            entity.HasIndex(e => e.TestFormaId).HasDatabaseName("fk_pickguard_testforma");
+            entity.HasOne<GitarTestforma>()
+                .WithMany()
+                .HasForeignKey(e => e.TestFormaId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("fk_pickguard_testforma");
+        });
+
+        modelBuilder.Entity<GitarNyak>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.ToTable("gitar_nyak");
+            entity.Property(e => e.Id).HasColumnType("int(11)").HasColumnName("Id");
+            entity.Property(e => e.Nev).HasMaxLength(50).HasColumnName("Nev");
+            entity.Property(e => e.KepUrl).HasMaxLength(255).HasColumnName("KepUrl");
+            entity.Property(e => e.Ar).HasColumnType("int(11)").HasColumnName("Ar");
+            entity.Property(e => e.ZIndex).HasColumnType("int(11)").HasColumnName("ZIndex");
         });
 
         OnModelCreatingPartial(modelBuilder);
