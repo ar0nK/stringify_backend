@@ -26,26 +26,21 @@ namespace Stringify.Api.Controllers
                 .Select(t => new ProductDto
                 {
                     Id = t.Id,
-                    Title = t.Nev,
+                    Name = t.Nev,
+                    Description = t.Leiras,
                     ShortDescription = t.RovidLeiras,
-                    LongDescription = t.Leiras,
-                    PreviewDescription = t.RovidLeiras ?? "",
-
                     Price = t.Ar,
                     IsAvailable = t.Elerheto,
-
+                    GuitarTypeId = t.GitarTipusId,
+                    CreatedAt = t.Letrehozva,
                     Images = new List<string>
                     {
-                t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
-                t.TermekKepek != null ? t.TermekKepek.Kep2 : "",
-                t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
-                t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
-                t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
-                    },
-                    // Remove the .AsEnumerable().Where().ToList() here
-
-                    Rating = null,
-                    ReviewCount = null
+                        t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep2 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
+                        t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
+                    }
                 })
                 .ToListAsync();
 

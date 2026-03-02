@@ -26,14 +26,13 @@ namespace Stringify.Api.Controllers
                 .Select(t => new ProductDto
                 {
                     Id = t.Id,
-                    Title = t.Nev,
+                    Name = t.Nev,
+                    Description = t.Leiras,
                     ShortDescription = t.RovidLeiras,
-                    LongDescription = t.Leiras,
-                    PreviewDescription = t.RovidLeiras ?? "",
-
                     Price = t.Ar,
                     IsAvailable = t.Elerheto,
-
+                    GuitarTypeId = t.GitarTipusId,
+                    CreatedAt = t.Letrehozva,
                     Images = new List<string>
                     {
                         t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
@@ -41,10 +40,7 @@ namespace Stringify.Api.Controllers
                         t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
                         t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
                         t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
-                    },
-
-                    Rating = null,
-                    ReviewCount = null
+                    }
                 })
                 .ToListAsync();
 
@@ -69,14 +65,13 @@ namespace Stringify.Api.Controllers
                 .Select(t => new ProductDto
                 {
                     Id = t.Id,
-                    Title = t.Nev,
+                    Name = t.Nev,
+                    Description = t.Leiras,
                     ShortDescription = t.RovidLeiras,
-                    LongDescription = t.Leiras,
-                    PreviewDescription = t.RovidLeiras ?? "",
-
                     Price = t.Ar,
                     IsAvailable = t.Elerheto,
-
+                    GuitarTypeId = t.GitarTipusId,
+                    CreatedAt = t.Letrehozva,
                     Images = new List<string>
                     {
                         t.TermekKepek != null ? t.TermekKepek.Kep1 : "",
@@ -84,10 +79,7 @@ namespace Stringify.Api.Controllers
                         t.TermekKepek != null ? t.TermekKepek.Kep3 : "",
                         t.TermekKepek != null ? t.TermekKepek.Kep4 : "",
                         t.TermekKepek != null ? t.TermekKepek.Kep5 : ""
-                    },
-
-                    Rating = null,
-                    ReviewCount = null
+                    }
                 })
                 .FirstOrDefaultAsync();
 
