@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 20. 10:07
+-- Létrehozás ideje: 2026. Már 03. 09:06
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -29,6 +29,7 @@ USE `stringify`;
 -- Tábla szerkezet ehhez a táblához `egyedi_gitar`
 --
 
+DROP TABLE IF EXISTS `egyedi_gitar`;
 CREATE TABLE `egyedi_gitar` (
   `Id` int(11) NOT NULL,
   `FelhasznaloId` int(11) DEFAULT NULL,
@@ -45,6 +46,7 @@ CREATE TABLE `egyedi_gitar` (
 -- A nézet helyettes szerkezete `egyedi_gitar_ar`
 -- (Lásd alább az aktuális nézetet)
 --
+DROP VIEW IF EXISTS `egyedi_gitar_ar`;
 CREATE TABLE `egyedi_gitar_ar` (
 `EgyediGitarId` int(11)
 ,`OsszAr` bigint(14)
@@ -56,6 +58,7 @@ CREATE TABLE `egyedi_gitar_ar` (
 -- Tábla szerkezet ehhez a táblához `felhasznalo`
 --
 
+DROP TABLE IF EXISTS `felhasznalo`;
 CREATE TABLE `felhasznalo` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(100) NOT NULL,
@@ -80,6 +83,7 @@ INSERT INTO `felhasznalo` (`Id`, `Nev`, `Email`, `Jelszo`, `SALT`, `Jogosultsag`
 -- Tábla szerkezet ehhez a táblához `gitar_finish`
 --
 
+DROP TABLE IF EXISTS `gitar_finish`;
 CREATE TABLE `gitar_finish` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL,
@@ -99,7 +103,11 @@ INSERT INTO `gitar_finish` (`Id`, `Nev`, `KepUrl`, `Ar`, `TestFormaId`, `ZIndex`
 (3, 'Sunburst', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FBody%2Fsunburst_body.png', 60000, 1, 10),
 (4, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fblack_body.png', 40000, 2, 10),
 (5, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fred_body.png', 50000, 2, 10),
-(6, 'Sunburst', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fsunburst_body.png', 60000, 2, 10);
+(6, 'Sunburst', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fsunburst_body.png', 60000, 2, 10),
+(10, 'White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Fwhite_body.png', 45000, 2, 10),
+(11, 'Olympic White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FBody%2Folympic_white_body.png', 50000, 2, 10),
+(12, 'Sunburst 2', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FBody%2Fsunburst2_body.png', 55000, 1, 10),
+(13, 'Sunburst 3', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FBody%2Fsunburst3_body.png', 60000, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -107,6 +115,7 @@ INSERT INTO `gitar_finish` (`Id`, `Nev`, `KepUrl`, `Ar`, `TestFormaId`, `ZIndex`
 -- Tábla szerkezet ehhez a táblához `gitar_global_elem`
 --
 
+DROP TABLE IF EXISTS `gitar_global_elem`;
 CREATE TABLE `gitar_global_elem` (
   `Id` int(11) NOT NULL,
   `Tipus` enum('bridge','headstock') NOT NULL,
@@ -120,6 +129,7 @@ CREATE TABLE `gitar_global_elem` (
 -- Tábla szerkezet ehhez a táblához `gitar_nyak`
 --
 
+DROP TABLE IF EXISTS `gitar_nyak`;
 CREATE TABLE `gitar_nyak` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL,
@@ -143,6 +153,7 @@ INSERT INTO `gitar_nyak` (`Id`, `Nev`, `KepUrl`, `Ar`, `ZIndex`) VALUES
 -- Tábla szerkezet ehhez a táblához `gitar_pickguard`
 --
 
+DROP TABLE IF EXISTS `gitar_pickguard`;
 CREATE TABLE `gitar_pickguard` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL,
@@ -170,6 +181,7 @@ INSERT INTO `gitar_pickguard` (`Id`, `Nev`, `KepUrl`, `Ar`, `TestFormaId`, `ZInd
 -- Tábla szerkezet ehhez a táblához `gitar_testforma`
 --
 
+DROP TABLE IF EXISTS `gitar_testforma`;
 CREATE TABLE `gitar_testforma` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL,
@@ -191,6 +203,7 @@ INSERT INTO `gitar_testforma` (`Id`, `Nev`, `Leiras`, `Ar`) VALUES
 -- Tábla szerkezet ehhez a táblához `gitar_tipus`
 --
 
+DROP TABLE IF EXISTS `gitar_tipus`;
 CREATE TABLE `gitar_tipus` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(50) NOT NULL
@@ -211,6 +224,7 @@ INSERT INTO `gitar_tipus` (`Id`, `Nev`) VALUES
 -- Tábla szerkezet ehhez a táblához `kedvenc_termek`
 --
 
+DROP TABLE IF EXISTS `kedvenc_termek`;
 CREATE TABLE `kedvenc_termek` (
   `Id` int(11) NOT NULL,
   `FelhasznaloId` int(11) NOT NULL,
@@ -231,6 +245,7 @@ INSERT INTO `kedvenc_termek` (`Id`, `FelhasznaloId`, `TermekId`, `Letrehozva`) V
 -- Tábla szerkezet ehhez a táblához `rendeles`
 --
 
+DROP TABLE IF EXISTS `rendeles`;
 CREATE TABLE `rendeles` (
   `Id` int(11) NOT NULL,
   `FelhasznaloId` int(11) NOT NULL,
@@ -245,14 +260,14 @@ CREATE TABLE `rendeles` (
 -- Tábla szerkezet ehhez a táblához `rendeles_cimek`
 --
 
+DROP TABLE IF EXISTS `rendeles_cimek`;
 CREATE TABLE `rendeles_cimek` (
   `Id` int(11) NOT NULL,
   `FelhasznaloId` int(11) NOT NULL,
   `iranyitoszam` int(4) NOT NULL,
   `varos` varchar(30) NOT NULL,
   `utca_hazszam` varchar(50) NOT NULL,
-  `telefonszam` varchar(15) NOT NULL,
-  `szamlazasi/szallitasi` int(1) NOT NULL
+  `telefonszam` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -261,11 +276,13 @@ CREATE TABLE `rendeles_cimek` (
 -- Tábla szerkezet ehhez a táblához `rendeles_tetel`
 --
 
+DROP TABLE IF EXISTS `rendeles_tetel`;
 CREATE TABLE `rendeles_tetel` (
   `Id` int(11) NOT NULL,
   `RendelesId` int(11) NOT NULL,
   `TermekId` int(11) DEFAULT NULL,
-  `EgyediGitarId` int(11) DEFAULT NULL
+  `EgyediGitarId` int(11) DEFAULT NULL,
+  `TermekDarab` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -274,6 +291,7 @@ CREATE TABLE `rendeles_tetel` (
 -- Tábla szerkezet ehhez a táblához `termek`
 --
 
+DROP TABLE IF EXISTS `termek`;
 CREATE TABLE `termek` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(150) NOT NULL,
@@ -327,6 +345,7 @@ INSERT INTO `termek` (`Id`, `Nev`, `Leiras`, `RovidLeiras`, `Ar`, `Elerheto`, `G
 -- Tábla szerkezet ehhez a táblához `termek_kepek`
 --
 
+DROP TABLE IF EXISTS `termek_kepek`;
 CREATE TABLE `termek_kepek` (
   `Id` int(11) NOT NULL,
   `TermekId` int(11) NOT NULL,
@@ -380,6 +399,7 @@ INSERT INTO `termek_kepek` (`Id`, `TermekId`, `kep1`, `kep2`, `kep3`, `kep4`, `k
 --
 DROP TABLE IF EXISTS `egyedi_gitar_ar`;
 
+DROP VIEW IF EXISTS `egyedi_gitar_ar`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `egyedi_gitar_ar`  AS SELECT `eg`.`Id` AS `EgyediGitarId`, `gt`.`Ar`+ `f`.`Ar` + `pg`.`Ar` + `n`.`Ar` AS `OsszAr` FROM ((((`egyedi_gitar` `eg` join `gitar_testforma` `gt` on(`eg`.`TestformaId` = `gt`.`Id`)) join `gitar_finish` `f` on(`eg`.`FinishId` = `f`.`Id`)) join `gitar_pickguard` `pg` on(`eg`.`PickguardId` = `pg`.`Id`)) join `gitar_nyak` `n` on(`eg`.`NeckId` = `n`.`Id`)) ;
 
 --
@@ -508,7 +528,7 @@ ALTER TABLE `felhasznalo`
 -- AUTO_INCREMENT a táblához `gitar_finish`
 --
 ALTER TABLE `gitar_finish`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_global_elem`
