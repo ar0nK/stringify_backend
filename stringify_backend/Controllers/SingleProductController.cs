@@ -26,9 +26,10 @@ namespace Stringify.Api.Controllers
                 .Select(t => new ProductDto
                 {
                     Id = t.Id,
-                    Name = t.Nev,
-                    Description = t.Leiras,
+                    Title = t.Nev,
                     ShortDescription = t.RovidLeiras,
+                    LongDescription = t.Leiras,
+                    PreviewDescription = t.RovidLeiras ?? "",
                     Price = t.Ar,
                     IsAvailable = t.Elerheto,
                     GuitarTypeId = t.GitarTipusId,
@@ -65,9 +66,10 @@ namespace Stringify.Api.Controllers
                 .Select(t => new ProductDto
                 {
                     Id = t.Id,
-                    Name = t.Nev,
-                    Description = t.Leiras,
+                    Title = t.Nev,
                     ShortDescription = t.RovidLeiras,
+                    LongDescription = t.Leiras,
+                    PreviewDescription = t.RovidLeiras ?? "",
                     Price = t.Ar,
                     IsAvailable = t.Elerheto,
                     GuitarTypeId = t.GitarTipusId,
