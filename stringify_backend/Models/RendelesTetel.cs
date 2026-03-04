@@ -6,6 +6,7 @@ namespace stringify_backend.Models
         public int RendelesId { get; set; }
         public int? TermekId { get; set; }
         public int? EgyediGitarId { get; set; }
+        public int Darabszam { get; set; } = 1;
 
         public virtual Rendeles Rendeles { get; set; } = null!;
         public virtual Termek? Termek { get; set; }

@@ -67,7 +67,11 @@ namespace stringify_backend.Controllers
 
             var cart = await GetOrCreateCartAsync(user.Id);
 
-            var termekIds = cart.Tetelek.Where(t => t.TermekId != null).Select(t => t.TermekId!.Value).Distinct().ToList();
+            var termekIds = cart.Tetelek
+                .Where(t => t.TermekId != null && t.Darabszam > 0)
+                .Select(t => t.TermekId!.Value)
+                .Distinct()
+                .ToList();
             var termekek = await _db.Termekek
                 .AsNoTracking()
                 .Include(t => t.TermekKepek)
@@ -75,7 +79,7 @@ namespace stringify_backend.Controllers
                 .ToListAsync();
 
             var productGroups = cart.Tetelek
-                .Where(t => t.TermekId != null)
+                .Where(t => t.TermekId != null && t.Darabszam > 0)
                 .GroupBy(t => t.TermekId!.Value)
                 .Select(g =>
                 {
@@ -88,7 +92,7 @@ namespace stringify_backend.Controllers
                         price = p?.Ar ?? 0,
                         isAvailable = p?.Elerheto ?? false,
                         image = p?.TermekKepek != null ? (p.TermekKepek.Kep1 ?? "") : "",
-                        quantity = g.Count()
+                        quantity = g.Sum(x => x.Darabszam)
                     };
                 })
                 .ToList();
@@ -123,13 +127,21 @@ namespace stringify_backend.Controllers
                 var exists = await _db.Termekek.AsNoTracking().AnyAsync(t => t.Id == req.TermekId.Value);
                 if (!exists) return NotFound("Termék nem található");
 
-                for (int i = 0; i < qty; i++)
+                var item = await _db.RendelesTetelek
+                    .FirstOrDefaultAsync(t => t.RendelesId == cart.Id && t.TermekId == req.TermekId.Value);
+
+                if (item == null)
                 {
                     _db.RendelesTetelek.Add(new RendelesTetel
                     {
                         RendelesId = cart.Id,
-                        TermekId = req.TermekId.Value
+                        TermekId = req.TermekId.Value,
+                        Darabszam = qty
                     });
+                }
+                else
+                {
+                    item.Darabszam += qty;
                 }
             }
             else
@@ -137,13 +149,21 @@ namespace stringify_backend.Controllers
                 var exists = await _db.EgyediGitarok.AsNoTracking().AnyAsync(g => g.Id == req.EgyediGitarId!.Value);
                 if (!exists) return NotFound("Egyedi gitár nem található");
 
-                for (int i = 0; i < qty; i++)
+                var item = await _db.RendelesTetelek
+                    .FirstOrDefaultAsync(t => t.RendelesId == cart.Id && t.EgyediGitarId == req.EgyediGitarId!.Value);
+
+                if (item == null)
                 {
                     _db.RendelesTetelek.Add(new RendelesTetel
                     {
                         RendelesId = cart.Id,
-                        EgyediGitarId = req.EgyediGitarId!.Value
+                        EgyediGitarId = req.EgyediGitarId!.Value,
+                        Darabszam = qty
                     });
+                }
+                else
+                {
+                    item.Darabszam += qty;
                 }
             }
 
@@ -168,21 +188,23 @@ namespace stringify_backend.Controllers
                     .Where(t => t.RendelesId == cart.Id && t.TermekId == req.TermekId.Value)
                     .ToListAsync();
 
-                var currentQty = rows.Count;
-                if (targetQty == currentQty) return Ok(new { message = "Nincs változás" });
-
                 if (targetQty == 0)
                 {
                     _db.RendelesTetelek.RemoveRange(rows);
                 }
-                else if (targetQty > currentQty)
+                else if (rows.Count == 0)
                 {
-                    for (int i = 0; i < (targetQty - currentQty); i++)
-                        _db.RendelesTetelek.Add(new RendelesTetel { RendelesId = cart.Id, TermekId = req.TermekId.Value });
+                    _db.RendelesTetelek.Add(new RendelesTetel
+                    {
+                        RendelesId = cart.Id,
+                        TermekId = req.TermekId.Value,
+                        Darabszam = targetQty
+                    });
                 }
                 else
                 {
-                    _db.RendelesTetelek.RemoveRange(rows.Take(currentQty - targetQty));
+                    rows[0].Darabszam = targetQty;
+                    if (rows.Count > 1) _db.RendelesTetelek.RemoveRange(rows.Skip(1));
                 }
             }
             else
@@ -190,20 +212,24 @@ namespace stringify_backend.Controllers
                 var rows = await _db.RendelesTetelek
                     .Where(t => t.RendelesId == cart.Id && t.EgyediGitarId == req.EgyediGitarId!.Value)
                     .ToListAsync();
-                var currentQty = rows.Count;
 
                 if (targetQty == 0)
                 {
                     _db.RendelesTetelek.RemoveRange(rows);
                 }
-                else if (targetQty > currentQty)
+                else if (rows.Count == 0)
                 {
-                    for (int i = 0; i < (targetQty - currentQty); i++)
-                        _db.RendelesTetelek.Add(new RendelesTetel { RendelesId = cart.Id, EgyediGitarId = req.EgyediGitarId!.Value });
+                    _db.RendelesTetelek.Add(new RendelesTetel
+                    {
+                        RendelesId = cart.Id,
+                        EgyediGitarId = req.EgyediGitarId!.Value,
+                        Darabszam = targetQty
+                    });
                 }
-                else if (targetQty < currentQty)
+                else
                 {
-                    _db.RendelesTetelek.RemoveRange(rows.Take(currentQty - targetQty));
+                    rows[0].Darabszam = targetQty;
+                    if (rows.Count > 1) _db.RendelesTetelek.RemoveRange(rows.Skip(1));
                 }
             }
 
