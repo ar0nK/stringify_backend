@@ -158,7 +158,7 @@ public partial class StringifyDbContext : DbContext
             entity.Property(e => e.RendelesId).HasColumnType("int(11)");
             entity.Property(e => e.TermekId).HasColumnType("int(11)");
             entity.Property(e => e.EgyediGitarId).HasColumnType("int(11)");
-            entity.Property(e => e.Darabszam).HasColumnType("int(11)");
+            entity.Property(e => e.Darabszam).HasColumnName("TermekDarab").HasColumnType("int(4)");
             entity.HasIndex(e => e.RendelesId).HasDatabaseName("RendelesId");
             entity.HasOne(e => e.Termek)
                 .WithMany()
