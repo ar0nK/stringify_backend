@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 04. 12:20
+-- Létrehozás ideje: 2026. Már 04. 12:33
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -72,7 +72,8 @@ CREATE TABLE `felhasznalo` (
 
 INSERT INTO `felhasznalo` (`Id`, `Nev`, `Email`, `Jelszo`, `SALT`, `Jogosultsag`, `Aktiv`) VALUES
 (1, 'teszt teszt', 'teszt@gmail.com', 'c74fc60fe5a0914e84da66d74cc483e6a9eea362780166f0d79ecda3902bc2dd', 'UAVUnYeQ5reKKUtPJ3reu6JBZeUwNskm1Ck65wXGnt38uQSKjgS1RC09LmQegzMK', 1, 1),
-(2, 'teszt teszt2', 'teszt2@gmail.com', 'e734b8206e82fe0341278618ba053503bae0fee25a024e87986bd0aa5b1024d8', 'jXmrZZVPFoDIiuVINUTn2Pr7GjZy1YBjdDTxv23CeBRbVrDZyahOUl1Pjd3jOXNY', 1, 1);
+(2, 'teszt teszt2', 'teszt2@gmail.com', 'e734b8206e82fe0341278618ba053503bae0fee25a024e87986bd0aa5b1024d8', 'jXmrZZVPFoDIiuVINUTn2Pr7GjZy1YBjdDTxv23CeBRbVrDZyahOUl1Pjd3jOXNY', 1, 1),
+(3, 'teszt elek', 'tesztemail@gmail.com', '24f3fae43ea54034959e7ac8a0c0f013fcb8c995d5b256e9a27d94236cccb4d2', 'fY1qHAsdcliCruWqF+GJ9vnVikLFze+5WpNz/WMfK58=', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -164,9 +165,9 @@ INSERT INTO `gitar_pickguard` (`Id`, `Nev`, `KepUrl`, `Ar`, `TestFormaId`, `ZInd
 (1, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FPickguard%2Fblack_pickguard.png', 20000, 1, 20),
 (2, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FPickguard%2Fred_pickguard.png', 30000, 1, 20),
 (3, 'White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FStratocaster%2FPickguard%2Fwhite_pickguard.png', 25000, 1, 20),
-(4, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard%2Fblack_pickguard.png', 20000, 2, 20),
-(5, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard%2Fred_pickguard.png', 30000, 2, 20),
-(6, 'White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard%2Fwhite_pickguard.png', 25000, 2, 20);
+(4, 'Black', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard_javitott%2Fblack_pickguard.png', 20000, 2, 20),
+(5, 'Red', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard_javitott%2Fred_pickguard.png', 30000, 2, 20),
+(6, 'White', 'https://cdn.synk.hu/stringify/Egyedi_gitar%2FTelecaster%2FPickguard_javitott%2Fwhite_pickguard.png', 25000, 2, 20);
 
 -- --------------------------------------------------------
 
@@ -506,7 +507,7 @@ ALTER TABLE `egyedi_gitar`
 -- AUTO_INCREMENT a táblához `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_finish`
