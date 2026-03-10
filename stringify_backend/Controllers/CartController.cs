@@ -87,7 +87,8 @@ namespace stringify_backend.Controllers
                     return new
                     {
                         type = "product",
-                        productId = g.Key,
+                        productId = (int?)g.Key,
+                        customGuitarId = (int?)null,
                         title = p?.Nev ?? "Ismeretlen termék",
                         price = p?.Ar ?? 0,
                         isAvailable = p?.Elerheto ?? false,
@@ -97,7 +98,77 @@ namespace stringify_backend.Controllers
                 })
                 .ToList();
 
-            var total = productGroups.Sum(i => i.price * i.quantity);
+            var customIds = cart.Tetelek
+                .Where(t => t.EgyediGitarId != null && t.Darabszam > 0)
+                .Select(t => t.EgyediGitarId!.Value)
+                .Distinct()
+                .ToList();
+
+            var customGuitars = await _db.EgyediGitarok
+                .AsNoTracking()
+                .Where(g => customIds.Contains(g.Id))
+                .ToListAsync();
+
+            var testformaIds = customGuitars.Select(g => g.TestformaId).Distinct().ToList();
+            var neckIds = customGuitars.Select(g => g.NeckId).Distinct().ToList();
+            var finishIds = customGuitars.Where(g => g.FinishId != null).Select(g => g.FinishId!.Value).Distinct().ToList();
+            var pickguardIds = customGuitars.Where(g => g.PickguardId != null).Select(g => g.PickguardId!.Value).Distinct().ToList();
+
+            var testformak = await _db.GitarTestformak.AsNoTracking().Where(t => testformaIds.Contains(t.Id)).ToListAsync();
+            var nyakak = await _db.GitarNyakak.AsNoTracking().Where(n => neckIds.Contains(n.Id)).ToListAsync();
+            var finishek = await _db.GitarFinishek.AsNoTracking().Where(f => finishIds.Contains(f.Id)).ToListAsync();
+            var pickguardok = await _db.GitarPickguardok.AsNoTracking().Where(p => pickguardIds.Contains(p.Id)).ToListAsync();
+
+            var testformaById = testformak.ToDictionary(t => t.Id);
+            var nyakById = nyakak.ToDictionary(n => n.Id);
+            var finishById = finishek.ToDictionary(f => f.Id);
+            var pickguardById = pickguardok.ToDictionary(p => p.Id);
+
+            var customGroups = cart.Tetelek
+                .Where(t => t.EgyediGitarId != null && t.Darabszam > 0)
+                .GroupBy(t => t.EgyediGitarId!.Value)
+                .Select(g =>
+                {
+                    var custom = customGuitars.FirstOrDefault(x => x.Id == g.Key);
+                    GitarTestforma? testforma = null;
+                    GitarNyak? nyak = null;
+                    GitarFinish? finish = null;
+                    GitarPickguard? pickguard = null;
+
+                    if (custom != null)
+                    {
+                        testformaById.TryGetValue(custom.TestformaId, out testforma);
+                        nyakById.TryGetValue(custom.NeckId, out nyak);
+                        if (custom.FinishId != null) finishById.TryGetValue(custom.FinishId.Value, out finish);
+                        if (custom.PickguardId != null) pickguardById.TryGetValue(custom.PickguardId.Value, out pickguard);
+                    }
+
+                    var titleParts = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(testforma?.Nev)) titleParts.Add(testforma.Nev);
+                    if (!string.IsNullOrWhiteSpace(finish?.Nev)) titleParts.Add(finish.Nev);
+                    if (!string.IsNullOrWhiteSpace(pickguard?.Nev)) titleParts.Add(pickguard.Nev);
+                    if (!string.IsNullOrWhiteSpace(nyak?.Nev)) titleParts.Add(nyak.Nev);
+                    var title = titleParts.Count > 0 ? string.Join(" - ", titleParts) : "Egyedi gitár";
+
+                    var price = (testforma?.Ar ?? 0) + (nyak?.Ar ?? 0) + (finish?.Ar ?? 0) + (pickguard?.Ar ?? 0);
+                    var image = finish?.KepUrl ?? pickguard?.KepUrl ?? nyak?.KepUrl ?? "";
+
+                    return new
+                    {
+                        type = "custom",
+                        productId = (int?)null,
+                        customGuitarId = (int?)g.Key,
+                        title,
+                        price,
+                        isAvailable = true,
+                        image,
+                        quantity = g.Sum(x => x.Darabszam)
+                    };
+                })
+                .ToList();
+
+            var allItems = productGroups.Concat(customGroups).ToList();
+            var total = allItems.Sum(i => i.price * i.quantity);
             cart.Osszeg = total;
             await _db.SaveChangesAsync();
 
@@ -106,7 +177,7 @@ namespace stringify_backend.Controllers
                 orderId = cart.Id,
                 status = cart.Status,
                 total,
-                items = productGroups
+                items = allItems
             });
         }
 

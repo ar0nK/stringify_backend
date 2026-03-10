@@ -1,11 +1,10 @@
+using System.Text;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using stringify_backend.Models;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 
 namespace stringify_backend
 {
@@ -95,10 +94,8 @@ namespace stringify_backend
 
             });*/
 
-            builder.Services.AddControllers()
-            .AddJsonOptions(options => {
-                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            });
+
+            builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {
