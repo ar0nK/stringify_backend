@@ -45,7 +45,6 @@ namespace Stringify.Api.Controllers
                 })
                 .ToListAsync();
 
-            // Filter empty images AFTER retrieving from database
             foreach (var product in products)
             {
                 product.Images = product.Images
@@ -90,7 +89,6 @@ namespace Stringify.Api.Controllers
                 return NotFound($"Product with ID {id} not found");
             }
 
-            // Filter empty images
             product.Images = product.Images
                 .Where(url => !string.IsNullOrWhiteSpace(url))
                 .ToList();

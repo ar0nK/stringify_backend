@@ -85,15 +85,6 @@ namespace stringify_backend
 
             builder.Services.AddAuthorization();
 
-            /*builder.Services.AddCors(c =>
-            {
-                c.AddPolicy("AllowOrigin", options =>
-                    options.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader());
-
-            });*/
-
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

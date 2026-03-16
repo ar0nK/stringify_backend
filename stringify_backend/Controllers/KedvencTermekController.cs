@@ -18,7 +18,6 @@ namespace stringify_backend.Controllers
             _context = context;
         }
 
-        // Helper method to get current user from JWT claims
         private async Task<User?> GetCurrentUserAsync()
         {
             var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -31,7 +30,6 @@ namespace stringify_backend.Controllers
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId && u.Aktiv == 1);
         }
 
-        // GET: api/kedvencetermek - Get all favorites for logged-in user
         [HttpGet]
         public async Task<ActionResult<IEnumerable<int>>> GetUserFavorites()
         {
@@ -49,7 +47,6 @@ namespace stringify_backend.Controllers
             return Ok(favoriteProductIds);
         }
 
-        // GET: api/kedvencetermek/products - Get full product details for favorites
         [HttpGet("products")]
         public async Task<ActionResult> GetUserFavoriteProducts()
         {
@@ -94,7 +91,6 @@ namespace stringify_backend.Controllers
             return Ok(favoriteProducts);
         }
 
-        // POST: api/kedvencetermek/{termekId} - Add product to favorites
         [HttpPost("{termekId}")]
         public async Task<IActionResult> AddFavorite(int termekId)
         {
@@ -104,14 +100,12 @@ namespace stringify_backend.Controllers
                 return Unauthorized("Kérjük, jelentkezz be!");
             }
 
-            // Check if product exists
             var product = await _context.Termekek.FindAsync(termekId);
             if (product == null)
             {
                 return NotFound("Termék nem található");
             }
 
-            // Check if already favorited
             var existingFavorite = await _context.KedvencTermekek
                 .FirstOrDefaultAsync(kt => kt.FelhasznaloId == currentUser.Id && kt.TermekId == termekId);
 
@@ -120,7 +114,6 @@ namespace stringify_backend.Controllers
                 return BadRequest("Ez a termék már a kedvencek között van");
             }
 
-            // Add to favorites
             var kedvenc = new KedvencTermek
             {
                 FelhasznaloId = currentUser.Id,
@@ -134,7 +127,6 @@ namespace stringify_backend.Controllers
             return Ok(new { message = "Termék hozzáadva a kedvencekhez" });
         }
 
-        // DELETE: api/kedvencetermek/{termekId} - Remove product from favorites
         [HttpDelete("{termekId}")]
         public async Task<IActionResult> RemoveFavorite(int termekId)
         {

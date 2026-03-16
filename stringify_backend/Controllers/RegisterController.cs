@@ -23,7 +23,6 @@ namespace stringify_backend.Controllers
         {
             try
             {
-                // Check if email already exists
                 var existingUser = await _context.Users
                     .FirstOrDefaultAsync(u => u.Email == registerDTO.Email);
 

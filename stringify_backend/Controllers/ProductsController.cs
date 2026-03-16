@@ -45,7 +45,6 @@ namespace Stringify.Api.Controllers
                 })
                 .ToListAsync();
 
-            // Filter empty images AFTER retrieving from database
             foreach (var product in products)
             {
                 product.Images = product.Images
