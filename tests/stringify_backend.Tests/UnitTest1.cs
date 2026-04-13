@@ -163,7 +163,7 @@ public class ControllerTests
 
         var config = TestHelpers.CreateConfiguration(new Dictionary<string, string?>
         {
-            ["Jwt:Key"] = "default-key-1234567890",
+            ["Jwt:Key"] = "default-key-1234567890-default-key",
             ["Jwt:Issuer"] = "test",
             ["Jwt:Audience"] = "test",
             ["Jwt:ExpirationMinutes"] = "60"
@@ -213,7 +213,7 @@ public class ControllerTests
 
         var config = TestHelpers.CreateConfiguration(new Dictionary<string, string?>
         {
-            ["Jwt:Key"] = "default-key-1234567890",
+            ["Jwt:Key"] = "default-key-1234567890-default-key",
             ["Jwt:Issuer"] = "test",
             ["Jwt:Audience"] = "test",
             ["Jwt:ExpirationMinutes"] = "60"
@@ -301,6 +301,10 @@ public class ControllerTests
     {
         var db = TestHelpers.CreateInMemoryContext(nameof(EgyediGitarController_Save_CreatesEntry));
         db.Users.Add(new User { Id = 1, Email = "g@u.com", Nev = "G", Aktiv = 1, Jogosultsag = 1 });
+        db.GitarTestformak.Add(new GitarTestforma { Id = 1, Nev = "Body", Ar = 100 });
+        db.GitarNyakak.Add(new GitarNyak { Id = 2, Nev = "Neck", KepUrl = "neck.png", Ar = 50, ZIndex = 1 });
+        db.GitarFinishek.Add(new GitarFinish { Id = 3, Nev = "Finish", KepUrl = "finish.png", Ar = 25, TestFormaId = 1, ZIndex = 1 });
+        db.GitarPickguardok.Add(new GitarPickguard { Id = 4, Nev = "Pickguard", KepUrl = "pickguard.png", Ar = 10, TestFormaId = 1, ZIndex = 1 });
         await db.SaveChangesAsync();
 
         var controller = new EgyediGitarController(db);
@@ -323,5 +327,55 @@ public class ControllerTests
         Assert.NotNull(idProperty);
         var idValue = idProperty!.GetValue(data);
         Assert.True(Convert.ToInt32(idValue) > 0);
+    }
+
+    [Fact]
+    public async Task EgyediGitarController_GetById_DoesNotExposeOtherUsersData()
+    {
+        var db = TestHelpers.CreateInMemoryContext(nameof(EgyediGitarController_GetById_DoesNotExposeOtherUsersData));
+        db.EgyediGitarok.Add(new EgyediGitar
+        {
+            Id = 1,
+            FelhasznaloId = 2,
+            TestformaId = 1,
+            NeckId = 2,
+            Letrehozva = DateTime.UtcNow
+        });
+        await db.SaveChangesAsync();
+
+        var controller = new EgyediGitarController(db);
+        controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext
+        {
+            User = TestHelpers.CreateUserPrincipal(1)
+        };
+
+        var result = await controller.Get(1);
+        Assert.IsType<NotFoundResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task CartController_AddToCart_RejectsOtherUsersCustomGuitar()
+    {
+        var db = TestHelpers.CreateInMemoryContext(nameof(CartController_AddToCart_RejectsOtherUsersCustomGuitar));
+        db.Users.Add(new User { Id = 1, Email = "u1@u.com", Nev = "U1", Aktiv = 1, Jogosultsag = 1 });
+        db.Users.Add(new User { Id = 2, Email = "u2@u.com", Nev = "U2", Aktiv = 1, Jogosultsag = 1 });
+        db.EgyediGitarok.Add(new EgyediGitar
+        {
+            Id = 10,
+            FelhasznaloId = 2,
+            TestformaId = 1,
+            NeckId = 2,
+            Letrehozva = DateTime.UtcNow
+        });
+        await db.SaveChangesAsync();
+
+        var controller = new CartController(db);
+        controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext
+        {
+            User = TestHelpers.CreateUserPrincipal(1)
+        };
+
+        var result = await controller.AddToCart(new CartController.CartItemRequest { EgyediGitarId = 10, Quantity = 1 });
+        Assert.IsType<NotFoundObjectResult>(result);
     }
 }

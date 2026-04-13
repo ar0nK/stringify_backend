@@ -20,7 +20,7 @@ namespace stringify_backend.Models
         public int TermekId { get; set; }
 
         [Column("Letrehozva")]
-        public DateTime Letrehozva { get; set; } = DateTime.Now;
+        public DateTime Letrehozva { get; set; } = DateTime.UtcNow;
 
         public virtual User? Felhasznalo { get; set; }
         public virtual Termek? Termek { get; set; }

@@ -40,7 +40,7 @@ namespace stringify_backend.Controllers
                 FelhasznaloId = userId,
                 Status = CartStatus,
                 Osszeg = 0,
-                Datum = DateTime.Now,
+                Datum = DateTime.UtcNow,
             };
 
             _db.Rendelesek.Add(cart);
@@ -292,7 +292,7 @@ namespace stringify_backend.Controllers
             }
             else
             {
-                var exists = await _db.EgyediGitarok.AsNoTracking().AnyAsync(g => g.Id == req.EgyediGitarId!.Value);
+                var exists = await _db.EgyediGitarok.AsNoTracking().AnyAsync(g => g.Id == req.EgyediGitarId!.Value && g.FelhasznaloId == user.Id);
                 if (!exists) return NotFound("Egyedi gitár nem található");
 
                 var item = await _db.RendelesTetelek
@@ -436,7 +436,7 @@ namespace stringify_backend.Controllers
                 FelhasznaloId = user.Id,
                 Status = OrderStatus,
                 Osszeg = total,
-                Datum = DateTime.Now
+                Datum = DateTime.UtcNow
             };
 
             _db.Rendelesek.Add(order);
