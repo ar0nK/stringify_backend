@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using stringify_backend.DTOs;
 using stringify_backend.Models;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace stringify_backend.Controllers
 {
@@ -22,18 +23,8 @@ namespace stringify_backend.Controllers
         {
             try
             {
-                var normalizedEmail = registerDTO.Email.Trim().ToLowerInvariant();
-                var normalizedName = registerDTO.Nev.Trim();
-
-                if (string.IsNullOrWhiteSpace(normalizedName) ||
-                    string.IsNullOrWhiteSpace(normalizedEmail) ||
-                    string.IsNullOrWhiteSpace(registerDTO.Jelszo))
-                {
-                    return BadRequest("Minden mező kitöltése kötelező.");
-                }
-
                 var existingUser = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == normalizedEmail);
+                    .FirstOrDefaultAsync(u => u.Email == registerDTO.Email);
 
                 if (existingUser != null)
                 {
@@ -48,8 +39,8 @@ namespace stringify_backend.Controllers
 
                 var newUser = new User
                 {
-                    Nev = normalizedName,
-                    Email = normalizedEmail,
+                    Nev = registerDTO.Nev,
+                    Email = registerDTO.Email,
                     Jelszo = finalHash,
                     Salt = salt,
                     Jogosultsag = 1,

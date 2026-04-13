@@ -28,11 +28,12 @@ namespace stringify_backend.Controllers
         {
             try
             {
-                var normalizedEmail = email.Trim().ToLowerInvariant();
                 User response = await _context.Users
-                    .FirstOrDefaultAsync(f => f.Email == normalizedEmail);
+                    .FirstOrDefaultAsync(f => f.Email == email);
 
-                return Ok(response?.Salt ?? Program.GenerateSalt());
+                return response == null
+                    ? BadRequest("Felhasználó nem található")
+                    : Ok(response.Salt);
             }
             catch (Exception ex)
             {
@@ -45,11 +46,10 @@ namespace stringify_backend.Controllers
         {
             try
             {
-                var normalizedEmail = loginDTO.Email.Trim().ToLowerInvariant();
                 string Hash = Program.CreateSHA256(loginDTO.TmpHash);
 
                 User loggedUser = await _context.Users
-                    .FirstOrDefaultAsync(f => f.Email == normalizedEmail && f.Jelszo == Hash);
+                    .FirstOrDefaultAsync(f => f.Email == loginDTO.Email && f.Jelszo == Hash);
 
                 if (loggedUser != null && loggedUser.Aktiv == 1)
                 {
@@ -77,9 +77,9 @@ namespace stringify_backend.Controllers
         private string CreateJwt(User user)
         {
             var key = _configuration["Jwt:Key"] ?? string.Empty;
-            if (string.IsNullOrWhiteSpace(key) || key.Length < 32)
+            if (string.IsNullOrWhiteSpace(key))
             {
-                throw new InvalidOperationException("JWT Key is missing from configuration or too short.");
+                throw new InvalidOperationException("JWT Key is missing from configuration.");
             }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));

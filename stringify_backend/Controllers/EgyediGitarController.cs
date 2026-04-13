@@ -40,24 +40,15 @@ namespace stringify_backend.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<EgyediGitar>>> GetAll()
         {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
-
-            return await _context.EgyediGitarok
-                .Where(g => g.FelhasznaloId == userId)
-                .ToListAsync();
+            return await _context.EgyediGitarok.ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<EgyediGitar>> Get(int id)
         {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
-
-            var gitar = await _context.EgyediGitarok.FirstOrDefaultAsync(g => g.Id == id && g.FelhasznaloId == userId);
+            var gitar = await _context.EgyediGitarok.FindAsync(id);
             if (gitar == null) return NotFound();
             return gitar;
         }
@@ -67,26 +58,16 @@ namespace stringify_backend.Controllers
         public async Task<IActionResult> Save([FromBody] EgyediGitarSaveDto dto)
         {
             var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
-
-            var hasValidTestforma = await _context.GitarTestformak.AnyAsync(t => t.Id == dto.TestformaId);
-            var hasValidNyak = await _context.GitarNyakak.AnyAsync(n => n.Id == dto.NeckId);
-            var hasValidFinish = dto.FinishId == null || await _context.GitarFinishek.AnyAsync(f => f.Id == dto.FinishId.Value && f.TestFormaId == dto.TestformaId);
-            var hasValidPickguard = dto.PickguardId == null || await _context.GitarPickguardok.AnyAsync(p => p.Id == dto.PickguardId.Value && p.TestFormaId == dto.TestformaId);
-
-            if (!hasValidTestforma || !hasValidNyak || !hasValidFinish || !hasValidPickguard)
-            {
-                return BadRequest();
-            }
+            if (userIdStr == null) return Unauthorized();
 
             var gitar = new EgyediGitar
             {
-                FelhasznaloId = userId,
+                FelhasznaloId = int.Parse(userIdStr),
                 TestformaId   = dto.TestformaId,
                 FinishId      = dto.FinishId,
                 PickguardId   = dto.PickguardId,
                 NeckId        = dto.NeckId,
-                Letrehozva    = DateTime.UtcNow
+                Letrehozva    = DateTime.Now
             };
 
             _context.EgyediGitarok.Add(gitar);
@@ -96,44 +77,18 @@ namespace stringify_backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
         public async Task<IActionResult> Update(int id, EgyediGitar gitar)
         {
             if (id != gitar.Id) return BadRequest();
-
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
-
-            var existing = await _context.EgyediGitarok.FirstOrDefaultAsync(g => g.Id == id && g.FelhasznaloId == userId);
-            if (existing == null) return NotFound();
-
-            var hasValidTestforma = await _context.GitarTestformak.AnyAsync(t => t.Id == gitar.TestformaId);
-            var hasValidNyak = await _context.GitarNyakak.AnyAsync(n => n.Id == gitar.NeckId);
-            var hasValidFinish = gitar.FinishId == null || await _context.GitarFinishek.AnyAsync(f => f.Id == gitar.FinishId.Value && f.TestFormaId == gitar.TestformaId);
-            var hasValidPickguard = gitar.PickguardId == null || await _context.GitarPickguardok.AnyAsync(p => p.Id == gitar.PickguardId.Value && p.TestFormaId == gitar.TestformaId);
-
-            if (!hasValidTestforma || !hasValidNyak || !hasValidFinish || !hasValidPickguard)
-            {
-                return BadRequest();
-            }
-
-            existing.TestformaId = gitar.TestformaId;
-            existing.FinishId = gitar.FinishId;
-            existing.PickguardId = gitar.PickguardId;
-            existing.NeckId = gitar.NeckId;
-
+            _context.Entry(gitar).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
-
-            var gitar = await _context.EgyediGitarok.FirstOrDefaultAsync(g => g.Id == id && g.FelhasznaloId == userId);
+            var gitar = await _context.EgyediGitarok.FindAsync(id);
             if (gitar == null) return NotFound();
             _context.EgyediGitarok.Remove(gitar);
             await _context.SaveChangesAsync();

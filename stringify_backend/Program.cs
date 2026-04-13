@@ -18,13 +18,14 @@ namespace stringify_backend
 
         public static string GenerateSalt()
         {
-            const string karakterek = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var saltChars = new char[SaltLength];
+            Random random = new Random();
+            string karakterek = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            string salt = "";
             for (int i = 0; i < SaltLength; i++)
             {
-                saltChars[i] = karakterek[RandomNumberGenerator.GetInt32(karakterek.Length)];
+                salt += karakterek[random.Next(karakterek.Length)];
             }
-            return new string(saltChars);
+            return salt;
         }
 
         public static string CreateSHA256(string input)
@@ -41,43 +42,8 @@ namespace stringify_backend
             }
         }
 
-        public static void LoadDotEnv(string path)
-        {
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            foreach (var rawLine in File.ReadAllLines(path))
-            {
-                var line = rawLine.Trim();
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#"))
-                {
-                    continue;
-                }
-
-                var separatorIndex = line.IndexOf('=');
-                if (separatorIndex <= 0)
-                {
-                    continue;
-                }
-
-                var key = line[..separatorIndex].Trim();
-                var value = line[(separatorIndex + 1)..].Trim().Trim('"');
-
-                if (string.IsNullOrWhiteSpace(key) || !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(key)))
-                {
-                    continue;
-                }
-
-                Environment.SetEnvironmentVariable(key, value);
-            }
-        }
-
         public static void Main(string[] args)
         {
-            LoadDotEnv(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
-
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddCors(c =>
@@ -96,10 +62,6 @@ namespace stringify_backend
 
             var jwtSection = builder.Configuration.GetSection("Jwt");
             var jwtKey = jwtSection.GetValue<string>("Key") ?? string.Empty;
-            if (jwtKey.Length < 32)
-            {
-                throw new InvalidOperationException("JWT Key must be at least 32 characters long.");
-            }
 
             builder.Services.AddAuthentication(options =>
             {
