@@ -20,7 +20,10 @@ namespace stringify_backend.Controllers
 
         private async Task<User?> GetCurrentUserAsync()
         {
-            var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdValue =
+                User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+                User.FindFirstValue("sub") ??
+                User.FindFirstValue("nameid");
 
             if (!int.TryParse(userIdValue, out var userId))
             {

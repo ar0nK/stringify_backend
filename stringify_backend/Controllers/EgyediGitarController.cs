@@ -57,7 +57,10 @@ namespace stringify_backend.Controllers
         [Authorize]
         public async Task<IActionResult> Save([FromBody] EgyediGitarSaveDto dto)
         {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr =
+                User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+                User.FindFirstValue("sub") ??
+                User.FindFirstValue("nameid");
             if (userIdStr == null) return Unauthorized();
 
             var gitar = new EgyediGitar
