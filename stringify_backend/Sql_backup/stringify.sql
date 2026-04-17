@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Már 04. 12:33
+-- Létrehozás ideje: 2026. Ápr 17. 08:34
 -- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- PHP verzió: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `stringify`
 --
-CREATE DATABASE IF NOT EXISTS `stringify` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci;
-USE `stringify`;
 
 -- --------------------------------------------------------
 
@@ -71,9 +69,8 @@ CREATE TABLE `felhasznalo` (
 --
 
 INSERT INTO `felhasznalo` (`Id`, `Nev`, `Email`, `Jelszo`, `SALT`, `Jogosultsag`, `Aktiv`) VALUES
-(1, 'teszt teszt', 'teszt@gmail.com', 'c74fc60fe5a0914e84da66d74cc483e6a9eea362780166f0d79ecda3902bc2dd', 'UAVUnYeQ5reKKUtPJ3reu6JBZeUwNskm1Ck65wXGnt38uQSKjgS1RC09LmQegzMK', 1, 1),
-(2, 'teszt teszt2', 'teszt2@gmail.com', 'e734b8206e82fe0341278618ba053503bae0fee25a024e87986bd0aa5b1024d8', 'jXmrZZVPFoDIiuVINUTn2Pr7GjZy1YBjdDTxv23CeBRbVrDZyahOUl1Pjd3jOXNY', 1, 1),
-(3, 'teszt elek', 'tesztemail@gmail.com', '24f3fae43ea54034959e7ac8a0c0f013fcb8c995d5b256e9a27d94236cccb4d2', 'fY1qHAsdcliCruWqF+GJ9vnVikLFze+5WpNz/WMfK58=', 1, 1);
+(1, 'Vendég Viktor', 'guestuser@gmail.com', 'ed708175b162ac427f5dcc4878ffb5e27b31faa87d4ce8bcfe8f741223fb1cc8', 'pCFHyS1FWzlhUQDRFH/TEPkIblg3tn6GtCQ+Tfo6TiI=', 1, 1),
+(2, 'Adminisztrátór Antónió', 'useradmin@gmail.com', '48647a6ab6dab1e40877d47960d868231761593190df31f8f8b70266c97b6344', 'yRG1lhmlz0ey8gD9WQMCOfg++AKIuVXGfGCLgdJveqY=', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -222,13 +219,6 @@ CREATE TABLE `kedvenc_termek` (
   `TermekId` int(11) NOT NULL,
   `Letrehozva` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
---
--- A tábla adatainak kiíratása `kedvenc_termek`
---
-
-INSERT INTO `kedvenc_termek` (`Id`, `FelhasznaloId`, `TermekId`, `Letrehozva`) VALUES
-(1, 1, 2, '2026-02-13 11:00:04');
 
 -- --------------------------------------------------------
 
@@ -507,7 +497,7 @@ ALTER TABLE `egyedi_gitar`
 -- AUTO_INCREMENT a táblához `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `gitar_finish`
